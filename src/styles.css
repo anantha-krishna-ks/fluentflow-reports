@@ -59,18 +59,28 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-danger-soft: var(--danger-soft);
+  --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(0.985 0.004 106);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.52 0.10 198);
+  --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
@@ -95,6 +105,15 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --success: oklch(0.62 0.13 158);
+  --success-foreground: oklch(0.99 0 0);
+  --success-soft: oklch(0.95 0.04 158);
+  --warning: oklch(0.75 0.14 72);
+  --warning-foreground: oklch(0.25 0.06 72);
+  --warning-soft: oklch(0.96 0.05 82);
+  --danger: oklch(0.62 0.16 25);
+  --danger-foreground: oklch(0.99 0 0);
+  --danger-soft: oklch(0.95 0.04 25);
 }
 
 .dark {
@@ -130,6 +149,15 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  --success: oklch(0.68 0.13 158);
+  --success-foreground: oklch(0.16 0.03 158);
+  --success-soft: oklch(0.30 0.06 158);
+  --warning: oklch(0.79 0.14 78);
+  --warning-foreground: oklch(0.20 0.05 78);
+  --warning-soft: oklch(0.32 0.07 78);
+  --danger: oklch(0.68 0.16 25);
+  --danger-foreground: oklch(0.17 0.04 25);
+  --danger-soft: oklch(0.31 0.08 25);
 }
 
 @layer base {
