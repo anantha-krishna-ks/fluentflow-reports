@@ -26,7 +26,7 @@ import {
 import { BandBadge } from "@/components/report/band-badge";
 import { BandBreakdown } from "@/components/report/band-breakdown";
 import { ReportFilters } from "@/components/report/report-filters";
-import { reportSearchSchema } from "@/lib/report-search";
+import { reportSearchSchema, type ReportSearch } from "@/lib/report-search";
 import {
   buildTrend,
   classSummary,
@@ -109,8 +109,8 @@ function ClassReport() {
     );
   }, [summary.rows, band, q, sort]);
 
-  const update = (next: Partial<typeof search>) =>
-    navigate({ search: (prev) => ({ ...prev, ...next }) });
+  const update = (next: Partial<ReportSearch>) =>
+    navigate({ search: (prev: ReportSearch) => ({ ...prev, ...next }) });
 
   const sectionLabel = sections.find((s) => s.id === section)?.label ?? section;
   const maxWord = words[0]?.instances ?? 1;
