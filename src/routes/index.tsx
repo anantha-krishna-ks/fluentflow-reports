@@ -166,22 +166,22 @@ function ClassReport() {
           <div className="mt-4 h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={trend} margin={{ left: -20, right: 8, top: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-                <XAxis dataKey="label" stroke="var(--color-muted-foreground)" fontSize={12} />
-                <YAxis domain={[0, 100]} stroke="var(--color-muted-foreground)" fontSize={12} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis dataKey="label" stroke="var(--muted-foreground)" fontSize={12} />
+                <YAxis domain={[0, 100]} stroke="var(--muted-foreground)" fontSize={12} />
                 <Tooltip
                   contentStyle={{
-                    background: "var(--color-popover)",
-                    border: "1px solid var(--color-border)",
+                    background: "var(--popover)",
+                    border: "1px solid var(--border)",
                     borderRadius: 8,
-                    color: "var(--color-popover-foreground)",
+                    color: "var(--popover-foreground)",
                   }}
                 />
                 <Line
                   type="monotone"
                   dataKey="fluency"
                   name="Fluency"
-                  stroke="var(--color-primary)"
+                  stroke="var(--primary)"
                   strokeWidth={2.5}
                   dot={false}
                 />
@@ -189,7 +189,7 @@ function ClassReport() {
                   type="monotone"
                   dataKey="pronunciation"
                   name="Pronunciation"
-                  stroke="var(--color-warning)"
+                  stroke="var(--warning)"
                   strokeWidth={2.5}
                   dot={false}
                 />

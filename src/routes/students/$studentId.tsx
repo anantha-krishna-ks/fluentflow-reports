@@ -149,17 +149,17 @@ function ScoreCard({ label, value }: { label: string; value: number }) {
   const band = bandOf(value);
   const color =
     band === "excellent"
-      ? "var(--color-success)"
+      ? "var(--success)"
       : band === "above-average"
-        ? "var(--color-warning)"
-        : "var(--color-danger)";
+        ? "var(--warning)"
+        : "var(--danger)";
 
   return (
     <div className="flex items-center gap-4 rounded-xl border bg-card p-4 sm:p-5">
       <div
         className="grid size-20 shrink-0 place-items-center rounded-full"
         style={{
-          background: `conic-gradient(${color} ${value * 3.6}deg, var(--color-muted) 0deg)`,
+          background: `conic-gradient(${color} ${value * 3.6}deg, var(--muted) 0deg)`,
         }}
       >
         <div className="grid size-15 place-items-center rounded-full bg-card text-lg font-semibold tabular-nums">
