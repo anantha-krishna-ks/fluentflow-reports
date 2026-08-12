@@ -113,11 +113,11 @@ function buildData() {
           Math.min(99, Math.round(base + drift - 3 + (rand() - 0.5) * 20)),
         );
 
-        const sentence = sentences[Math.floor(rand() * sentences.length)];
+        const sentence = sentences[Math.floor(rand() * sentences.length)]!;
         const issueCount = pronunciation > 80 ? Math.floor(rand() * 2) : 1 + Math.floor(rand() * 3);
         const words: WordIssue[] = [];
         for (let w = 0; w < issueCount; w++) {
-          const word = trickyWords[Math.floor(rand() * trickyWords.length)];
+          const word = trickyWords[Math.floor(rand() * trickyWords.length)]!;
           if (words.some((x) => x.word === word)) continue;
           words.push({ word, accuracy: Math.round(25 + rand() * 45) });
         }

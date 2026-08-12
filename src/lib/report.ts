@@ -68,7 +68,7 @@ export function buildStudentRows(section: string, from: string, to: string): Stu
         pronunciationBand: bandOf(pronunciation),
         overallBand: bandOf(overall),
         lastSubmission: list.length
-          ? list.map((a) => a.date).sort().slice(-1)[0]
+          ? list.map((a) => a.date).sort().slice(-1)[0]!
           : "",
         wordsToImprove: words.size,
       };
