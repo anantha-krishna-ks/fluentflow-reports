@@ -138,12 +138,8 @@ function ClassReport() {
 
       <section className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5">
         <StatTile label="Students in section" value={summary.total} icon={<Users className="size-4" />} />
-        <StatTile
-          label="Submitted assessment"
-          value={summary.submitted}
-          hint={`${summary.submissionRate}% submission rate`}
-        />
-        <StatTile label="Total attempts" value={summary.attempts} />
+        <StatTile label="Total chapters" value={summary.totalChapters} />
+        <StatTile label="Total exercises" value={summary.totalExercises} />
         <StatTile label="Avg fluency" value={`${summary.avgFluency}%`} accent />
         <StatTile label="Avg pronunciation" value={`${summary.avgPronunciation}%`} accent />
       </section>
