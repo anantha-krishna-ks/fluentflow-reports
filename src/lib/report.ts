@@ -1,5 +1,6 @@
 import {
   attempts as allAttempts,
+  sections,
   students as allStudents,
   type Attempt,
   type Band,
