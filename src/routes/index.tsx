@@ -140,7 +140,7 @@ function ClassReport() {
   const maxWord = words[0]?.instances ?? 1;
 
   return (
-    <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+    <main className="w-full px-4 py-6 sm:px-6 lg:px-8 lg:py-10 xl:px-12">
       <header className="mb-6">
         <p className="text-xs font-semibold tracking-widest text-primary uppercase">
           Language training · Reading assessment
