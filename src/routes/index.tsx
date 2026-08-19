@@ -177,7 +177,7 @@ function ClassReport() {
         <p className="text-xs font-semibold tracking-widest text-primary uppercase">
           Language training · Reading assessment
         </p>
-        <h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h1 className="mt-1 text-xl font-medium tracking-tight sm:text-2xl">
           Class performance report
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
