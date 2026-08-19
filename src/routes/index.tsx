@@ -335,26 +335,47 @@ function ClassReport() {
             <TableHeader>
               <TableRow>
                 <TableHead>
-                  <SortBtn active={sort === "name"} onClick={() => setSort("name")}>
+                  <SortBtn
+                    active={sort.key === "name"}
+                    dir={sort.dir}
+                    onClick={() => handleSort("name")}
+                  >
                     Student
                   </SortBtn>
                 </TableHead>
-                <TableHead className="text-right">Attempts</TableHead>
                 <TableHead className="text-right">
-                  <SortBtn active={sort === "fluency"} onClick={() => setSort("fluency")}>
+                  <SortBtn
+                    active={sort.key === "attempts"}
+                    dir={sort.dir}
+                    onClick={() => handleSort("attempts")}
+                  >
+                    Attempts
+                  </SortBtn>
+                </TableHead>
+                <TableHead className="text-right">
+                  <SortBtn
+                    active={sort.key === "fluency"}
+                    dir={sort.dir}
+                    onClick={() => handleSort("fluency")}
+                  >
                     Fluency
                   </SortBtn>
                 </TableHead>
                 <TableHead className="text-right">
                   <SortBtn
-                    active={sort === "pronunciation"}
-                    onClick={() => setSort("pronunciation")}
+                    active={sort.key === "pronunciation"}
+                    dir={sort.dir}
+                    onClick={() => handleSort("pronunciation")}
                   >
                     Pronunciation
                   </SortBtn>
                 </TableHead>
                 <TableHead className="text-right">
-                  <SortBtn active={sort === "overall"} onClick={() => setSort("overall")}>
+                  <SortBtn
+                    active={sort.key === "overall"}
+                    dir={sort.dir}
+                    onClick={() => handleSort("overall")}
+                  >
                     Overall
                   </SortBtn>
                 </TableHead>
