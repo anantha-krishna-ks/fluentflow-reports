@@ -16,6 +16,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
   Table,
   TableBody,
   TableCell,
@@ -33,6 +41,7 @@ import {
   countBands,
   formatDate,
   mispronouncedWords,
+  studentsForWord,
 } from "@/lib/report";
 import { sections } from "@/data/assessments";
 
