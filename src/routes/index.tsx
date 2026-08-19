@@ -435,6 +435,56 @@ function ClassReport() {
   );
 }
 
+function WordStudentsSheet({
+  word,
+  section,
+  from,
+  to,
+}: {
+  word: string;
+  section: string;
+  from: string;
+  to: string;
+}) {
+  const students = useMemo(() => studentsForWord(section, from, to, word), [section, from, to, word]);
+
+  return (
+    <SheetContent className="w-full sm:max-w-md">
+      <SheetHeader>
+        <SheetTitle className="capitalize">{word}</SheetTitle>
+        <SheetDescription>
+          {students.length} student{students.length === 1 ? "" : "s"} mispronounced this word
+        </SheetDescription>
+      </SheetHeader>
+      <div className="mt-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
+        {students.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No student data for this word.</p>
+        ) : (
+          <ul className="space-y-3">
+            {students.map((s) => (
+              <li key={s.student.id} className="rounded-lg border p-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <p className="font-medium">{s.student.name}</p>
+                    <p className="text-xs text-muted-foreground">#{s.student.rollNo}</p>
+                  </div>
+                  <div className="text-right text-xs text-muted-foreground tabular-nums">
+                    <p>{s.instances} instance{s.instances === 1 ? "" : "s"}</p>
+                    <p>{s.avgAccuracy}% avg accuracy</p>
+                  </div>
+                </div>
+                <p className="mt-2 text-sm italic text-muted-foreground">
+                  “{s.latestSentence}”
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </SheetContent>
+  );
+}
+
 function Mini({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-md bg-muted/60 px-2 py-1.5">
