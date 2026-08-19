@@ -26,11 +26,23 @@ export interface Student {
 export interface ClassSection {
   id: string;
   label: string;
+  chapters: string[];
 }
 
+export const chapters = [
+  "Chapter 1: The Thunderstorm",
+  "Chapter 2: A Warm Meal",
+  "Chapter 3: A Long Journey",
+  "Chapter 4: Evening Light",
+  "Chapter 5: The Library",
+  "Chapter 6: A Funny Mistake",
+  "Chapter 7: Mountain Weather",
+  "Chapter 8: The Presentation",
+];
+
 export const sections: ClassSection[] = [
-  { id: "grade-6-a", label: "Grade 6 - Section A" },
-  { id: "grade-6-b", label: "Grade 6 - Section B" },
+  { id: "grade-6-a", label: "Grade 6 - Section A", chapters },
+  { id: "grade-6-b", label: "Grade 6 - Section B", chapters },
 ];
 
 const firstNames = [
