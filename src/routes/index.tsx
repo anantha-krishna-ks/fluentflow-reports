@@ -320,7 +320,7 @@ function ClassReport() {
               {tabs.map((t) => (
                 <TabsTrigger key={t.key} value={t.key} className="whitespace-nowrap">
                   {t.label}
-                  <span className="ml-1.5 text-xs text-muted-foreground tabular-nums">
+                  <span className="ml-1.5 rounded-full bg-current/15 px-1.5 py-0.5 text-[11px] font-semibold tabular-nums text-[inherit]/80">
                     {counts[t.key]}
                   </span>
                 </TabsTrigger>
