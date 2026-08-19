@@ -243,22 +243,36 @@ function ClassReport() {
 
         <div className="rounded-xl border bg-card p-4 sm:p-5 lg:col-span-2">
           <h2 className="font-semibold">Commonly mispronounced words</h2>
-          <p className="text-sm text-muted-foreground">Instances across the class</p>
+          <p className="text-sm text-muted-foreground">Click a word to see students</p>
           <ul className="mt-4 space-y-2.5">
             {words.slice(0, 8).map((w) => (
               <li key={w.word}>
-                <div className="flex items-baseline justify-between gap-3 text-sm">
-                  <span className="font-medium">{w.word}</span>
-                  <span className="shrink-0 tabular-nums text-muted-foreground">
-                    {w.instances} instances · {w.students} students
-                  </span>
-                </div>
-                <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-muted">
-                  <div
-                    className="h-full rounded-full bg-danger"
-                    style={{ width: `${(w.instances / maxWord) * 100}%` }}
-                  />
-                </div>
+                <Sheet
+                  open={selectedWord === w.word}
+                  onOpenChange={(open) => setSelectedWord(open ? w.word : null)}
+                >
+                  <SheetTrigger asChild>
+                    <button
+                      type="button"
+                      className="w-full cursor-pointer text-left hover:opacity-80"
+                      aria-label={`Open students for ${w.word}`}
+                    >
+                      <div className="flex items-baseline justify-between gap-3 text-sm">
+                        <span className="font-medium">{w.word}</span>
+                        <span className="shrink-0 tabular-nums text-muted-foreground">
+                          {w.instances} instances · {w.students} students
+                        </span>
+                      </div>
+                      <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-muted">
+                        <div
+                          className="h-full rounded-full bg-danger"
+                          style={{ width: `${(w.instances / maxWord) * 100}%` }}
+                        />
+                      </div>
+                    </button>
+                  </SheetTrigger>
+                  <WordStudentsSheet word={w.word} section={section} from={from} to={to} />
+                </Sheet>
               </li>
             ))}
             {words.length === 0 && (
