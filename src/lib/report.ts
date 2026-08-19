@@ -148,6 +148,7 @@ export function buildTrend(section: string, from: string, to: string): TrendPoin
 export function classSummary(section: string, from: string, to: string) {
   const rows = buildStudentRows(section, from, to);
   const submitted = rows.filter((r) => r.attempts > 0);
+  const totalChapters = sections.find((s) => s.id === section)?.chapters.length ?? 0;
   return {
     rows,
     total: rows.length,
@@ -156,6 +157,8 @@ export function classSummary(section: string, from: string, to: string) {
     avgFluency: avg(submitted.map((r) => r.fluency)),
     avgPronunciation: avg(submitted.map((r) => r.pronunciation)),
     attempts: filterAttempts(section, from, to).length,
+    totalChapters,
+    totalExercises: filterAttempts(section, from, to).length,
   };
 }
 
