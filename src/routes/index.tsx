@@ -133,10 +133,6 @@ function ClassReport() {
     });
   }, [summary.rows, band, q, sort.key, sort.dir]);
 
-  useEffect(() => {
-    console.log("sort state:", sort, "first row:", rows[0]?.student.name);
-  }, [sort, rows]);
-
   const update = (next: Partial<ReportSearch>) =>
     navigate({ search: (prev: ReportSearch) => ({ ...prev, ...next }) });
 
