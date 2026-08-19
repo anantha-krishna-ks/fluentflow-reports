@@ -368,7 +368,7 @@ function ClassReport() {
               <Table className="table-fixed">
                 <TableHeader className="bg-secondary/80">
                   <TableRow className="hover:bg-transparent">
-                    <TableHead className="w-[22%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[20%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "name"}
                         dir={sort.dir}
@@ -377,7 +377,7 @@ function ClassReport() {
                         Student
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[9%] text-center py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[8%] text-center py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "attempts"}
                         dir={sort.dir}
@@ -404,7 +404,7 @@ function ClassReport() {
                         Pronunciation
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[10%] text-center py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[9%] text-center py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "overall"}
                         dir={sort.dir}
@@ -416,13 +416,13 @@ function ClassReport() {
                     <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
                       Band
                     </TableHead>
-                    <TableHead className="w-[7%] text-center py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[6%] text-center py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
                       Words
                     </TableHead>
-                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[12%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
                       Last submission
                     </TableHead>
-                    <TableHead className="w-[8%] py-3" />
+                    <TableHead className="w-[6%] py-3" />
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -699,17 +699,17 @@ function SortBtn({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-1 hover:text-foreground ${active ? "text-foreground font-semibold" : "text-muted-foreground"}`}
+      className={`inline-flex max-w-full items-center gap-1 text-left leading-tight hover:text-foreground ${active ? "text-foreground font-semibold" : "text-muted-foreground"}`}
     >
-      {children}
+      <span className="min-w-0">{children}</span>
       {active ? (
         dir === "asc" ? (
-          <ArrowUp className="size-3.5" />
+          <ArrowUp className="size-3.5 shrink-0" />
         ) : (
-          <ArrowDown className="size-3.5" />
+          <ArrowDown className="size-3.5 shrink-0" />
         )
       ) : (
-        <ArrowUpDown className="size-3.5 text-muted-foreground/50" />
+        <ArrowUpDown className="size-3.5 shrink-0 text-muted-foreground/50" />
       )}
     </button>
   );
