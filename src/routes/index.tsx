@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { zodValidator } from "@tanstack/zod-adapter";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   CartesianGrid,
   Line,
