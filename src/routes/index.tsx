@@ -530,19 +530,30 @@ function Mini({ label, value }: { label: string; value: string }) {
 
 function SortBtn({
   active,
+  dir,
   onClick,
   children,
 }: {
   active: boolean;
+  dir?: "asc" | "desc";
   onClick: () => void;
   children: React.ReactNode;
 }) {
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-1 ${active ? "text-foreground font-semibold" : ""}`}
+      className={`inline-flex items-center gap-1 hover:text-foreground ${active ? "text-foreground font-semibold" : "text-muted-foreground"}`}
     >
       {children}
+      {active ? (
+        dir === "asc" ? (
+          <ArrowUp className="size-3.5" />
+        ) : (
+          <ArrowDown className="size-3.5" />
+        )
+      ) : (
+        <ArrowUpDown className="size-3.5 text-muted-foreground/50" />
+      )}
     </button>
   );
 }
