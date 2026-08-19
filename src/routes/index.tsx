@@ -473,13 +473,13 @@ function AttendanceWidget({
 }) {
   return (
     <div className="grid h-full grid-cols-2 gap-3 rounded-xl border bg-card p-4 sm:p-5">
-      <div className="col-span-2 sm:col-span-1">
+      <div>
         <p className="text-xs text-muted-foreground">Submitted attendance</p>
         <p className="mt-0.5 text-2xl font-semibold tabular-nums sm:text-3xl">
           {submitted} <span className="text-lg text-muted-foreground">/ {total}</span>
         </p>
       </div>
-      <div className="col-span-2 sm:col-span-1">
+      <div>
         <p className="text-xs text-muted-foreground">Submission rate</p>
         <p className="mt-0.5 text-2xl font-semibold text-primary tabular-nums sm:text-3xl">
           {submissionRate}%
