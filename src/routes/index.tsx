@@ -386,7 +386,7 @@ function ClassReport() {
                         Attempts
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[14%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "fluency"}
                         dir={sort.dir}
@@ -395,7 +395,7 @@ function ClassReport() {
                         Fluency
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[14%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "pronunciation"}
                         dir={sort.dir}
