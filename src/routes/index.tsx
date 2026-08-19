@@ -456,13 +456,13 @@ function WordStudentsSheet({
           {students.length} student{students.length === 1 ? "" : "s"} mispronounced this word
         </SheetDescription>
       </SheetHeader>
-      <div className="mt-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <div className="mt-4 max-h-[calc(100vh-8rem)] overflow-y-auto">
         {students.length === 0 ? (
           <p className="text-sm text-muted-foreground">No student data for this word.</p>
         ) : (
           <ul className="space-y-3">
             {students.map((s) => (
-              <li key={s.student.id} className="rounded-lg border p-3">
+              <li key={s.student.id} className="flex flex-col justify-between rounded-lg border bg-white p-4">
                 <div className="flex items-start justify-between gap-2">
                   <div>
                     <p className="font-medium">{s.student.name}</p>
@@ -473,7 +473,7 @@ function WordStudentsSheet({
                     <p>{s.avgAccuracy}% avg accuracy</p>
                   </div>
                 </div>
-                <p className="mt-2 text-sm italic text-muted-foreground">
+                <p className="mt-3 text-sm italic text-muted-foreground">
                   “{s.latestSentence}”
                 </p>
               </li>
