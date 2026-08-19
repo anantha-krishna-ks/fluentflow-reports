@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ArrowUpRight, Search, Users } from "lucide-react";
+import { ArrowUpRight, Search, Users, ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
