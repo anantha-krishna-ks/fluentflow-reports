@@ -443,3 +443,44 @@ function StatTile({
     </div>
   );
 }
+
+function AttendanceWidget({
+  submitted,
+  total,
+  totalChapters,
+  totalExercises,
+  submissionRate,
+}: {
+  submitted: number;
+  total: number;
+  totalChapters: number;
+  totalExercises: number;
+  submissionRate: number;
+}) {
+  return (
+    <div className="h-full rounded-xl border bg-card p-4 sm:p-5">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <p className="text-xs font-medium text-muted-foreground">Submitted attendance</p>
+          <p className="mt-1 text-2xl font-semibold sm:text-3xl tabular-nums">
+            {submitted} <span className="text-lg text-muted-foreground">/ {total}</span>
+          </p>
+        </div>
+        <div className="text-right">
+          <p className="text-xs font-medium text-muted-foreground">Submission rate</p>
+          <p className="mt-1 text-2xl font-semibold text-primary tabular-nums">{submissionRate}%</p>
+        </div>
+      </div>
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        <div className="rounded-lg bg-muted/50 p-3">
+          <p className="text-[11px] text-muted-foreground">Total chapters</p>
+          <p className="mt-0.5 text-lg font-semibold tabular-nums">{totalChapters}</p>
+        </div>
+        <div className="rounded-lg bg-muted/50 p-3">
+          <p className="text-[11px] text-muted-foreground">Total exercises</p>
+          <p className="mt-0.5 text-lg font-semibold tabular-nums">{totalExercises}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
