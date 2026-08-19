@@ -365,10 +365,21 @@ function ClassReport() {
         <div className="hidden px-4 pb-5 sm:px-5 md:block">
           <div className="overflow-hidden rounded-xl border">
             <div>
-              <Table>
+              <Table className="table-fixed">
+                <colgroup>
+                  <col style={{ width: "20%" }} />
+                  <col style={{ width: "11%" }} />
+                  <col style={{ width: "12%" }} />
+                  <col style={{ width: "12%" }} />
+                  <col style={{ width: "10%" }} />
+                  <col style={{ width: "12%" }} />
+                  <col style={{ width: "6%" }} />
+                  <col style={{ width: "11%" }} />
+                  <col style={{ width: "7%" }} />
+                </colgroup>
                 <TableHeader className="bg-secondary/80">
                   <TableRow className="hover:bg-transparent">
-                    <TableHead className="w-[26%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "name"}
                         dir={sort.dir}
@@ -377,7 +388,7 @@ function ClassReport() {
                         Student
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="py-3 text-center text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "attempts"}
                         dir={sort.dir}
@@ -386,7 +397,7 @@ function ClassReport() {
                         Attempts
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[15%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "fluency"}
                         dir={sort.dir}
@@ -395,16 +406,16 @@ function ClassReport() {
                         Fluency
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[15%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "pronunciation"}
                         dir={sort.dir}
                         onClick={() => handleSort("pronunciation")}
                       >
-                        Pronunciation
+                        Pronun.
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="py-3 text-center text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "overall"}
                         dir={sort.dir}
@@ -413,13 +424,13 @@ function ClassReport() {
                         Overall
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       Band
                     </TableHead>
-                    <TableHead className="py-3 text-center text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="text-center py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       Words
                     </TableHead>
-                    <TableHead className="py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       Last submission
                     </TableHead>
                     <TableHead className="py-3" />
@@ -479,14 +490,14 @@ function ClassReport() {
                       <TableCell className="py-3 text-sm whitespace-nowrap text-muted-foreground">
                         {formatDate(r.lastSubmission)}
                       </TableCell>
-                      <TableCell className="py-3 text-right">
-                        <Button asChild size="sm" variant="ghost">
+                      <TableCell className="py-3 pr-3 text-right">
+                        <Button asChild size="sm" variant="ghost" className="px-2">
                           <Link
                             to="/students/$studentId"
                             params={{ studentId: r.student.id }}
                             search={{ section, from, to }}
                           >
-                            View <ArrowUpRight className="size-4" />
+                            View <ArrowUpRight className="size-3.5 shrink-0" />
                           </Link>
                         </Button>
                       </TableCell>
@@ -699,17 +710,17 @@ function SortBtn({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-1 hover:text-foreground ${active ? "text-foreground font-semibold" : "text-muted-foreground"}`}
+      className={`flex w-full items-center gap-1 leading-tight break-words hover:text-foreground ${active ? "text-foreground font-semibold" : "text-muted-foreground"}`}
     >
-      {children}
+      <span className="min-w-0 whitespace-nowrap">{children}</span>
       {active ? (
         dir === "asc" ? (
-          <ArrowUp className="size-3.5" />
+          <ArrowUp className="size-3.5 shrink-0" />
         ) : (
-          <ArrowDown className="size-3.5" />
+          <ArrowDown className="size-3.5 shrink-0" />
         )
       ) : (
-        <ArrowUpDown className="size-3.5 text-muted-foreground/50" />
+        <ArrowUpDown className="size-3.5 shrink-0 text-muted-foreground/50" />
       )}
     </button>
   );
