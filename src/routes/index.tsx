@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ArrowUpRight, Search, Users } from "lucide-react";
+import { ArrowUpRight, Search, Users, ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -76,9 +76,18 @@ const tabs = [
 function ClassReport() {
   const search = Route.useSearch();
   const navigate = useNavigate({ from: "/" });
-  const [sort, setSort] = useState<"overall" | "fluency" | "pronunciation" | "name">("overall");
+  const [sort, setSort] = useState<{
+    key: "overall" | "fluency" | "pronunciation" | "name" | "attempts";
+    dir: "asc" | "desc";
+  }>({ key: "overall", dir: "desc" });
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
 
+  function handleSort(key: typeof sort.key) {
+    setSort((prev) => ({
+      key,
+      dir: prev.key === key && prev.dir === "desc" ? "asc" : "desc",
+    }));
+  }
 
   const { section, from, to, band, q } = search;
 
@@ -115,10 +124,14 @@ function ClassReport() {
           r.student.rollNo.includes(needle),
       );
     }
-    return [...list].sort((a, b) =>
-      sort === "name" ? a.student.name.localeCompare(b.student.name) : b[sort] - a[sort],
-    );
-  }, [summary.rows, band, q, sort]);
+    return [...list].sort((a, b) => {
+      const dir = sort.dir === "asc" ? 1 : -1;
+      if (sort.key === "name") {
+        return dir * a.student.name.localeCompare(b.student.name);
+      }
+      return dir * (a[sort.key] - b[sort.key]);
+    });
+  }, [summary.rows, band, q, sort.key, sort.dir]);
 
   const update = (next: Partial<ReportSearch>) =>
     navigate({ search: (prev: ReportSearch) => ({ ...prev, ...next }) });
@@ -322,26 +335,47 @@ function ClassReport() {
             <TableHeader>
               <TableRow>
                 <TableHead>
-                  <SortBtn active={sort === "name"} onClick={() => setSort("name")}>
+                  <SortBtn
+                    active={sort.key === "name"}
+                    dir={sort.dir}
+                    onClick={() => handleSort("name")}
+                  >
                     Student
                   </SortBtn>
                 </TableHead>
-                <TableHead className="text-right">Attempts</TableHead>
                 <TableHead className="text-right">
-                  <SortBtn active={sort === "fluency"} onClick={() => setSort("fluency")}>
+                  <SortBtn
+                    active={sort.key === "attempts"}
+                    dir={sort.dir}
+                    onClick={() => handleSort("attempts")}
+                  >
+                    Attempts
+                  </SortBtn>
+                </TableHead>
+                <TableHead className="text-right">
+                  <SortBtn
+                    active={sort.key === "fluency"}
+                    dir={sort.dir}
+                    onClick={() => handleSort("fluency")}
+                  >
                     Fluency
                   </SortBtn>
                 </TableHead>
                 <TableHead className="text-right">
                   <SortBtn
-                    active={sort === "pronunciation"}
-                    onClick={() => setSort("pronunciation")}
+                    active={sort.key === "pronunciation"}
+                    dir={sort.dir}
+                    onClick={() => handleSort("pronunciation")}
                   >
                     Pronunciation
                   </SortBtn>
                 </TableHead>
                 <TableHead className="text-right">
-                  <SortBtn active={sort === "overall"} onClick={() => setSort("overall")}>
+                  <SortBtn
+                    active={sort.key === "overall"}
+                    dir={sort.dir}
+                    onClick={() => handleSort("overall")}
+                  >
                     Overall
                   </SortBtn>
                 </TableHead>
@@ -496,19 +530,30 @@ function Mini({ label, value }: { label: string; value: string }) {
 
 function SortBtn({
   active,
+  dir,
   onClick,
   children,
 }: {
   active: boolean;
+  dir?: "asc" | "desc";
   onClick: () => void;
   children: React.ReactNode;
 }) {
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-1 ${active ? "text-foreground font-semibold" : ""}`}
+      className={`inline-flex items-center gap-1 hover:text-foreground ${active ? "text-foreground font-semibold" : "text-muted-foreground"}`}
     >
       {children}
+      {active ? (
+        dir === "asc" ? (
+          <ArrowUp className="size-3.5" />
+        ) : (
+          <ArrowDown className="size-3.5" />
+        )
+      ) : (
+        <ArrowUpDown className="size-3.5 text-muted-foreground/50" />
+      )}
     </button>
   );
 }
