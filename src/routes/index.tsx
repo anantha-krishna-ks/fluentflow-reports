@@ -366,9 +366,20 @@ function ClassReport() {
           <div className="overflow-hidden rounded-xl border">
             <div>
               <Table className="table-fixed">
+                <colgroup>
+                  <col style={{ width: "20%" }} />
+                  <col style={{ width: "10%" }} />
+                  <col style={{ width: "13%" }} />
+                  <col style={{ width: "13%" }} />
+                  <col style={{ width: "9%" }} />
+                  <col style={{ width: "13%" }} />
+                  <col style={{ width: "6%" }} />
+                  <col style={{ width: "10%" }} />
+                  <col style={{ width: "6%" }} />
+                </colgroup>
                 <TableHeader className="bg-secondary/80">
                   <TableRow className="hover:bg-transparent">
-                    <TableHead className="w-[20%] py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
+                    <TableHead className="py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "name"}
                         dir={sort.dir}
@@ -377,7 +388,7 @@ function ClassReport() {
                         Student
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[10%] py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wide text-foreground uppercase">
+                    <TableHead className="py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "attempts"}
                         dir={sort.dir}
@@ -386,7 +397,7 @@ function ClassReport() {
                         Attempts
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
+                    <TableHead className="py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "fluency"}
                         dir={sort.dir}
@@ -395,7 +406,7 @@ function ClassReport() {
                         Fluency
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
+                    <TableHead className="py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "pronunciation"}
                         dir={sort.dir}
@@ -404,7 +415,7 @@ function ClassReport() {
                         Pronun.
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[9%] py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wide text-foreground uppercase">
+                    <TableHead className="py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "overall"}
                         dir={sort.dir}
@@ -413,16 +424,16 @@ function ClassReport() {
                         Overall
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
+                    <TableHead className="py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       Band
                     </TableHead>
-                    <TableHead className="w-[6%] text-center py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
+                    <TableHead className="text-center py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       Words
                     </TableHead>
-                    <TableHead className="w-[10%] py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
+                    <TableHead className="py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       Last submission
                     </TableHead>
-                    <TableHead className="w-[6%] py-3" />
+                    <TableHead className="py-3" />
                   </TableRow>
                 </TableHeader>
                 <TableBody>
