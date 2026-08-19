@@ -136,8 +136,8 @@ function ClassReport() {
         onChange={(next) => update(next)}
       />
 
-      <section className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-5">
-        <div className="sm:col-span-2 lg:col-span-2">
+      <section className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-6">
+        <div className="sm:col-span-2">
           <AttendanceWidget
             submitted={summary.submitted}
             total={summary.total}
@@ -146,6 +146,8 @@ function ClassReport() {
             submissionRate={summary.submissionRate}
           />
         </div>
+        <StatTile label="Students in section" value={summary.total} icon={<Users className="size-4" />} />
+        <StatTile label="Total attempts" value={summary.attempts} accent />
         <StatTile label="Avg fluency" value={`${summary.avgFluency}%`} accent />
         <StatTile label="Avg pronunciation" value={`${summary.avgPronunciation}%`} accent />
       </section>
