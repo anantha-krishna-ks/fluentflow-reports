@@ -330,105 +330,149 @@ function ClassReport() {
         </div>
 
         {/* Desktop table */}
-        <div className="hidden md:block p-4 sm:p-5">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>
-                  <SortBtn
-                    active={sort.key === "name"}
-                    dir={sort.dir}
-                    onClick={() => handleSort("name")}
-                  >
-                    Student
-                  </SortBtn>
-                </TableHead>
-                <TableHead className="text-right">
-                  <SortBtn
-                    active={sort.key === "attempts"}
-                    dir={sort.dir}
-                    onClick={() => handleSort("attempts")}
-                  >
-                    Attempts
-                  </SortBtn>
-                </TableHead>
-                <TableHead className="text-right">
-                  <SortBtn
-                    active={sort.key === "fluency"}
-                    dir={sort.dir}
-                    onClick={() => handleSort("fluency")}
-                  >
-                    Fluency
-                  </SortBtn>
-                </TableHead>
-                <TableHead className="text-right">
-                  <SortBtn
-                    active={sort.key === "pronunciation"}
-                    dir={sort.dir}
-                    onClick={() => handleSort("pronunciation")}
-                  >
-                    Pronunciation
-                  </SortBtn>
-                </TableHead>
-                <TableHead className="text-right">
-                  <SortBtn
-                    active={sort.key === "overall"}
-                    dir={sort.dir}
-                    onClick={() => handleSort("overall")}
-                  >
-                    Overall
-                  </SortBtn>
-                </TableHead>
-                <TableHead>Band</TableHead>
-                <TableHead>Words to improve</TableHead>
-                <TableHead>Last submission</TableHead>
-                <TableHead />
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rows.map((r) => (
-                <TableRow key={r.student.id}>
-                  <TableCell className="font-medium">
-                    {r.student.name}
-                    <span className="ml-2 text-xs text-muted-foreground">#{r.student.rollNo}</span>
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums">{r.attempts}</TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {r.attempts ? `${r.fluency}%` : "—"}
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {r.attempts ? `${r.pronunciation}%` : "—"}
-                  </TableCell>
-                  <TableCell className="text-right font-semibold tabular-nums">
-                    {r.attempts ? `${r.overall}%` : "—"}
-                  </TableCell>
-                  <TableCell>
-                    {r.attempts ? (
-                      <BandBadge band={r.overallBand} />
-                    ) : (
-                      <span className="text-xs text-muted-foreground">Not submitted</span>
-                    )}
-                  </TableCell>
-                  <TableCell className="tabular-nums">{r.wordsToImprove}</TableCell>
-                  <TableCell className="whitespace-nowrap text-muted-foreground">
-                    {formatDate(r.lastSubmission)}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <Button asChild size="sm" variant="ghost">
-                      <Link
-                        to="/students/$studentId"
-                        params={{ studentId: r.student.id }}
-                        search={{ section, from, to }}
+        <div className="hidden px-4 pb-5 sm:px-5 md:block">
+          <div className="overflow-hidden rounded-xl border">
+            <div className="max-h-[36rem] overflow-auto">
+              <Table>
+                <TableHeader className="sticky top-0 z-10 bg-secondary/80 backdrop-blur">
+                  <TableRow className="hover:bg-transparent">
+                    <TableHead className="w-[26%] py-3 text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
+                      <SortBtn
+                        active={sort.key === "name"}
+                        dir={sort.dir}
+                        onClick={() => handleSort("name")}
                       >
-                        View <ArrowUpRight className="size-4" />
-                      </Link>
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+                        Student
+                      </SortBtn>
+                    </TableHead>
+                    <TableHead className="py-3 text-center text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
+                      <SortBtn
+                        active={sort.key === "attempts"}
+                        dir={sort.dir}
+                        onClick={() => handleSort("attempts")}
+                      >
+                        Attempts
+                      </SortBtn>
+                    </TableHead>
+                    <TableHead className="w-[15%] py-3 text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
+                      <SortBtn
+                        active={sort.key === "fluency"}
+                        dir={sort.dir}
+                        onClick={() => handleSort("fluency")}
+                      >
+                        Fluency
+                      </SortBtn>
+                    </TableHead>
+                    <TableHead className="w-[15%] py-3 text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
+                      <SortBtn
+                        active={sort.key === "pronunciation"}
+                        dir={sort.dir}
+                        onClick={() => handleSort("pronunciation")}
+                      >
+                        Pronunciation
+                      </SortBtn>
+                    </TableHead>
+                    <TableHead className="py-3 text-center text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
+                      <SortBtn
+                        active={sort.key === "overall"}
+                        dir={sort.dir}
+                        onClick={() => handleSort("overall")}
+                      >
+                        Overall
+                      </SortBtn>
+                    </TableHead>
+                    <TableHead className="py-3 text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
+                      Band
+                    </TableHead>
+                    <TableHead className="py-3 text-center text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
+                      Words
+                    </TableHead>
+                    <TableHead className="py-3 text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
+                      Last submission
+                    </TableHead>
+                    <TableHead className="py-3" />
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {rows.map((r) => (
+                    <TableRow
+                      key={r.student.id}
+                      className="border-border/70 transition-colors hover:bg-accent/40"
+                    >
+                      <TableCell className="py-3">
+                        <div className="flex items-center gap-3">
+                          <span className="grid size-9 shrink-0 place-items-center rounded-full bg-accent text-xs font-semibold text-accent-foreground">
+                            {initials(r.student.name)}
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block truncate font-medium">{r.student.name}</span>
+                            <span className="block text-xs text-muted-foreground tabular-nums">
+                              Roll #{r.student.rollNo}
+                            </span>
+                          </span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="py-3 text-center tabular-nums">
+                        {r.attempts ? (
+                          r.attempts
+                        ) : (
+                          <span className="text-muted-foreground">0</span>
+                        )}
+                      </TableCell>
+                      <TableCell className="py-3">
+                        <ScoreCell value={r.attempts ? r.fluency : null} tone="bg-primary" />
+                      </TableCell>
+                      <TableCell className="py-3">
+                        <ScoreCell value={r.attempts ? r.pronunciation : null} tone="bg-chart-2" />
+                      </TableCell>
+                      <TableCell className="py-3 text-center">
+                        {r.attempts ? (
+                          <span className="inline-flex min-w-14 justify-center rounded-full bg-secondary px-2.5 py-1 text-sm font-semibold tabular-nums">
+                            {r.overall}%
+                          </span>
+                        ) : (
+                          <span className="text-muted-foreground">—</span>
+                        )}
+                      </TableCell>
+                      <TableCell className="py-3">
+                        {r.attempts ? (
+                          <BandBadge band={r.overallBand} />
+                        ) : (
+                          <span className="text-xs text-muted-foreground">Not submitted</span>
+                        )}
+                      </TableCell>
+                      <TableCell className="py-3 text-center tabular-nums">
+                        {r.wordsToImprove}
+                      </TableCell>
+                      <TableCell className="py-3 text-sm whitespace-nowrap text-muted-foreground">
+                        {formatDate(r.lastSubmission)}
+                      </TableCell>
+                      <TableCell className="py-3 text-right">
+                        <Button asChild size="sm" variant="ghost">
+                          <Link
+                            to="/students/$studentId"
+                            params={{ studentId: r.student.id }}
+                            search={{ section, from, to }}
+                          >
+                            View <ArrowUpRight className="size-4" />
+                          </Link>
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  {rows.length === 0 && (
+                    <TableRow className="hover:bg-transparent">
+                      <TableCell colSpan={9} className="py-10 text-center text-sm text-muted-foreground">
+                        No students match your filters.
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
         </div>
+
 
         {/* Mobile cards */}
         <div className="space-y-3 p-4 md:hidden">
@@ -564,6 +608,29 @@ function FactCell({ label, value, hint }: { label: string; value: React.ReactNod
       <p className="text-xs text-muted-foreground">{label}</p>
       <p className="mt-1 text-2xl font-semibold tabular-nums">{value}</p>
       {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
+    </div>
+  );
+}
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
+function ScoreCell({ value, tone }: { value: number | null; tone: string }) {
+  if (value === null) {
+    return <span className="text-sm text-muted-foreground">—</span>;
+  }
+  return (
+    <div className="flex items-center gap-2.5">
+      <div className="h-1.5 w-full max-w-24 overflow-hidden rounded-full bg-muted">
+        <div className={`h-full rounded-full ${tone}`} style={{ width: `${value}%` }} />
+      </div>
+      <span className="w-9 shrink-0 text-sm font-medium tabular-nums">{value}%</span>
     </div>
   );
 }
