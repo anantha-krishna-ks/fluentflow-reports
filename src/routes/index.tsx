@@ -89,10 +89,6 @@ function ClassReport() {
     }));
   }
 
-  useEffect(() => {
-    console.log("sort state:", sort, "first row:", rows[0]?.student.name);
-  }, [sort, rows]);
-
   const { section, from, to, band, q } = search;
 
   const summary = useMemo(() => classSummary(section, from, to), [section, from, to]);
