@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ArrowUpRight, GraduationCap, Search, Users } from "lucide-react";
+import { ArrowUpRight, Search, Users } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -136,40 +136,39 @@ function ClassReport() {
         onChange={(next) => update(next)}
       />
 
-      <section className="mt-6">
-        <div className="rounded-xl border bg-card">
-          <div className="grid grid-cols-2 divide-y divide-border sm:grid-cols-3 sm:divide-y-0 lg:grid-cols-6 lg:divide-x">
-            <MetricCell
-              label="Submitted attendance"
-              value={
-                <>
-                  {summary.submitted}
-                  <span className="text-lg text-muted-foreground"> / {summary.total}</span>
-                </>
-              }
-              icon={<Users className="size-3.5 shrink-0" />}
-            />
-            <MetricCell
-              label="Submission rate"
-              value={`${summary.submissionRate}%`}
-              accent
-              progress={summary.submissionRate}
-            />
-            <MetricCell label="Students in section" value={summary.total} />
-            <MetricCell label="Total chapters" value={summary.totalChapters} />
-            <MetricCell label="Total exercises" value={summary.totalExercises} />
-            <MetricCell
-              label="Total attempts"
-              value={summary.attempts}
-              hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} per student`}
+      <section className="mt-6 grid gap-4 lg:grid-cols-3">
+        <div className="rounded-xl border bg-card p-5 lg:col-span-1">
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Users className="size-3.5 shrink-0" />
+            <span>Submitted attendance</span>
+          </div>
+          <p className="mt-2 text-4xl font-semibold tracking-tight tabular-nums">
+            {summary.submitted}
+            <span className="text-xl text-muted-foreground"> / {summary.total}</span>
+          </p>
+          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
+            <div
+              className="h-full rounded-full bg-primary"
+              style={{ width: `${summary.submissionRate}%` }}
             />
           </div>
-          <div className="grid grid-cols-2 gap-3 border-t border-border p-4 sm:grid-cols-2 sm:p-5">
-            <ScoreBar label="Avg fluency" value={summary.avgFluency} />
-            <ScoreBar label="Avg pronunciation" value={summary.avgPronunciation} />
-          </div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            {summary.submissionRate}% submission rate
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-4 lg:col-span-2">
+          <FactCell label="Students" value={summary.total} />
+          <FactCell label="Chapters" value={summary.totalChapters} />
+          <FactCell label="Exercises" value={summary.totalExercises} />
+          <FactCell
+            label="Attempts"
+            value={summary.attempts}
+            hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} / student`}
+          />
         </div>
       </section>
+
 
 
 
@@ -439,59 +438,12 @@ function SortBtn({
   );
 }
 
-function MetricCell({
-  label,
-  value,
-  hint,
-  accent,
-  icon,
-  progress,
-}: {
-  label: string;
-  value: React.ReactNode;
-  hint?: string;
-  accent?: boolean;
-  icon?: React.ReactNode;
-  progress?: number;
-}) {
+function FactCell({ label, value, hint }: { label: string; value: React.ReactNode; hint?: string }) {
   return (
-    <div className="flex flex-col gap-1 p-4 sm:p-5">
-      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-        {icon ?? <GraduationCap className="size-3.5 shrink-0" />}
-        <span className="truncate">{label}</span>
-      </div>
-      <p
-        className={`text-2xl font-semibold tabular-nums sm:text-3xl ${accent ? "text-primary" : ""}`}
-      >
-        {value}
-      </p>
-      {typeof progress === "number" && (
-        <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-muted">
-          <div
-            className="h-full rounded-full bg-primary"
-            style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
-          />
-        </div>
-      )}
-      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+    <div className="flex flex-col justify-center bg-card p-5">
+      <p className="text-xs text-muted-foreground">{label}</p>
+      <p className="mt-1 text-2xl font-semibold tabular-nums">{value}</p>
+      {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
     </div>
   );
 }
-
-function ScoreBar({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="rounded-lg bg-muted/40 p-3">
-      <div className="flex items-baseline justify-between gap-2">
-        <span className="truncate text-xs text-muted-foreground">{label}</span>
-        <span className="text-lg font-semibold tabular-nums">{value}%</span>
-      </div>
-      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-background">
-        <div
-          className="h-full rounded-full bg-primary"
-          style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
-        />
-      </div>
-    </div>
-  );
-}
-
