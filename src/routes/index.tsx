@@ -76,9 +76,18 @@ const tabs = [
 function ClassReport() {
   const search = Route.useSearch();
   const navigate = useNavigate({ from: "/" });
-  const [sort, setSort] = useState<"overall" | "fluency" | "pronunciation" | "name">("overall");
+  const [sort, setSort] = useState<{
+    key: "overall" | "fluency" | "pronunciation" | "name" | "attempts";
+    dir: "asc" | "desc";
+  }>({ key: "overall", dir: "desc" });
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
 
+  function handleSort(key: typeof sort.key) {
+    setSort((prev) => ({
+      key,
+      dir: prev.key === key && prev.dir === "desc" ? "asc" : "desc",
+    }));
+  }
 
   const { section, from, to, band, q } = search;
 
@@ -115,10 +124,14 @@ function ClassReport() {
           r.student.rollNo.includes(needle),
       );
     }
-    return [...list].sort((a, b) =>
-      sort === "name" ? a.student.name.localeCompare(b.student.name) : b[sort] - a[sort],
-    );
-  }, [summary.rows, band, q, sort]);
+    return [...list].sort((a, b) => {
+      const dir = sort.dir === "asc" ? 1 : -1;
+      if (sort.key === "name") {
+        return dir * a.student.name.localeCompare(b.student.name);
+      }
+      return dir * (a[sort.key] - b[sort.key]);
+    });
+  }, [summary.rows, band, q, sort.key, sort.dir]);
 
   const update = (next: Partial<ReportSearch>) =>
     navigate({ search: (prev: ReportSearch) => ({ ...prev, ...next }) });
