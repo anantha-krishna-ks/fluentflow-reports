@@ -136,40 +136,39 @@ function ClassReport() {
         onChange={(next) => update(next)}
       />
 
-      <section className="mt-6">
-        <div className="rounded-xl border bg-card">
-          <div className="grid grid-cols-2 divide-y divide-border sm:grid-cols-3 sm:divide-y-0 lg:grid-cols-6 lg:divide-x">
-            <MetricCell
-              label="Submitted attendance"
-              value={
-                <>
-                  {summary.submitted}
-                  <span className="text-lg text-muted-foreground"> / {summary.total}</span>
-                </>
-              }
-              icon={<Users className="size-3.5 shrink-0" />}
-            />
-            <MetricCell
-              label="Submission rate"
-              value={`${summary.submissionRate}%`}
-              accent
-              progress={summary.submissionRate}
-            />
-            <MetricCell label="Students in section" value={summary.total} />
-            <MetricCell label="Total chapters" value={summary.totalChapters} />
-            <MetricCell label="Total exercises" value={summary.totalExercises} />
-            <MetricCell
-              label="Total attempts"
-              value={summary.attempts}
-              hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} per student`}
+      <section className="mt-6 grid gap-4 lg:grid-cols-3">
+        <div className="rounded-xl border bg-card p-5 lg:col-span-1">
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Users className="size-3.5 shrink-0" />
+            <span>Submitted attendance</span>
+          </div>
+          <p className="mt-2 text-4xl font-semibold tracking-tight tabular-nums">
+            {summary.submitted}
+            <span className="text-xl text-muted-foreground"> / {summary.total}</span>
+          </p>
+          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
+            <div
+              className="h-full rounded-full bg-primary"
+              style={{ width: `${summary.submissionRate}%` }}
             />
           </div>
-          <div className="grid grid-cols-2 gap-3 border-t border-border p-4 sm:grid-cols-2 sm:p-5">
-            <ScoreBar label="Avg fluency" value={summary.avgFluency} />
-            <ScoreBar label="Avg pronunciation" value={summary.avgPronunciation} />
-          </div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            {summary.submissionRate}% submission rate
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-4 lg:col-span-2">
+          <FactCell label="Students" value={summary.total} />
+          <FactCell label="Chapters" value={summary.totalChapters} />
+          <FactCell label="Exercises" value={summary.totalExercises} />
+          <FactCell
+            label="Attempts"
+            value={summary.attempts}
+            hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} / student`}
+          />
         </div>
       </section>
+
 
 
 
