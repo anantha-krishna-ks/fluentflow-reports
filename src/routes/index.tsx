@@ -374,8 +374,8 @@ function ClassReport() {
                   <col style={{ width: "10%" }} />
                   <col style={{ width: "12%" }} />
                   <col style={{ width: "6%" }} />
-                  <col style={{ width: "12%" }} />
-                  <col style={{ width: "5%" }} />
+                  <col style={{ width: "11%" }} />
+                  <col style={{ width: "7%" }} />
                 </colgroup>
                 <TableHeader className="bg-secondary/80">
                   <TableRow className="hover:bg-transparent">
