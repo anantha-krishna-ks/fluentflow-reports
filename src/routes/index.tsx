@@ -134,7 +134,10 @@ function ClassReport() {
   }, [summary.rows, band, q, sort.key, sort.dir]);
 
   const update = (next: Partial<ReportSearch>) =>
-    navigate({ search: (prev: ReportSearch) => ({ ...prev, ...next }) });
+    navigate({
+      search: (prev: ReportSearch) => ({ ...prev, ...next }),
+      resetScroll: false,
+    });
 
   const sectionLabel = sections.find((s) => s.id === section)?.label ?? section;
   const maxWord = words[0]?.instances ?? 1;
@@ -316,7 +319,7 @@ function ClassReport() {
 
         <div className="overflow-x-auto p-4 sm:p-5 pb-0">
           <Tabs value={band} onValueChange={(v) => update({ band: v })}>
-            <TabsList className="w-full justify-start overflow-x-auto sm:w-auto">
+            <TabsList className="w-full justify-start overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:w-auto">
               {tabs.map((t) => (
                 <TabsTrigger key={t.key} value={t.key} className="whitespace-nowrap">
                   {t.label}
