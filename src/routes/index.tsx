@@ -377,7 +377,7 @@ function ClassReport() {
                         Student
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[8%] text-center py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[8%] py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wider text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "attempts"}
                         dir={sort.dir}
@@ -404,7 +404,7 @@ function ClassReport() {
                         Pronunciation
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[9%] text-center py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[9%] py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wider text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "overall"}
                         dir={sort.dir}
@@ -479,14 +479,14 @@ function ClassReport() {
                       <TableCell className="py-3 text-sm text-muted-foreground">
                         {formatDate(r.lastSubmission)}
                       </TableCell>
-                      <TableCell className="py-3 text-right">
-                        <Button asChild size="sm" variant="ghost">
+                      <TableCell className="py-3 pr-3 text-right">
+                        <Button asChild size="sm" variant="ghost" className="px-2">
                           <Link
                             to="/students/$studentId"
                             params={{ studentId: r.student.id }}
                             search={{ section, from, to }}
                           >
-                            View <ArrowUpRight className="size-4" />
+                            View <ArrowUpRight className="size-3.5 shrink-0" />
                           </Link>
                         </Button>
                       </TableCell>
@@ -699,9 +699,9 @@ function SortBtn({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex max-w-full items-center gap-1 text-left leading-tight hover:text-foreground ${active ? "text-foreground font-semibold" : "text-muted-foreground"}`}
+      className={`flex w-full items-center gap-1 leading-tight break-words hover:text-foreground ${active ? "text-foreground font-semibold" : "text-muted-foreground"}`}
     >
-      <span className="min-w-0">{children}</span>
+      <span className="min-w-0 break-words">{children}</span>
       {active ? (
         dir === "asc" ? (
           <ArrowUp className="size-3.5 shrink-0" />
