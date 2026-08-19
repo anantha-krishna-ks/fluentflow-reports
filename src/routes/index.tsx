@@ -611,3 +611,26 @@ function FactCell({ label, value, hint }: { label: string; value: React.ReactNod
     </div>
   );
 }
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
+function ScoreCell({ value, tone }: { value: number | null; tone: string }) {
+  if (value === null) {
+    return <span className="text-sm text-muted-foreground">—</span>;
+  }
+  return (
+    <div className="flex items-center gap-2.5">
+      <div className="h-1.5 w-full max-w-24 overflow-hidden rounded-full bg-muted">
+        <div className={`h-full rounded-full ${tone}`} style={{ width: `${value}%` }} />
+      </div>
+      <span className="w-9 shrink-0 text-sm font-medium tabular-nums">{value}%</span>
+    </div>
+  );
+}
