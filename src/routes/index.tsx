@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { zodValidator } from "@tanstack/zod-adapter";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   CartesianGrid,
   Line,
@@ -10,7 +10,16 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ArrowUpRight, Search, Users, ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
+import {
+  ArrowUpRight,
+  Search,
+  Users,
+  ArrowUp,
+  ArrowDown,
+  ArrowUpDown,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
