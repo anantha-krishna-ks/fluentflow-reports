@@ -438,59 +438,12 @@ function SortBtn({
   );
 }
 
-function MetricCell({
-  label,
-  value,
-  hint,
-  accent,
-  icon,
-  progress,
-}: {
-  label: string;
-  value: React.ReactNode;
-  hint?: string;
-  accent?: boolean;
-  icon?: React.ReactNode;
-  progress?: number;
-}) {
+function FactCell({ label, value, hint }: { label: string; value: React.ReactNode; hint?: string }) {
   return (
-    <div className="flex flex-col gap-1 p-4 sm:p-5">
-      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-        {icon ?? <GraduationCap className="size-3.5 shrink-0" />}
-        <span className="truncate">{label}</span>
-      </div>
-      <p
-        className={`text-2xl font-semibold tabular-nums sm:text-3xl ${accent ? "text-primary" : ""}`}
-      >
-        {value}
-      </p>
-      {typeof progress === "number" && (
-        <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-muted">
-          <div
-            className="h-full rounded-full bg-primary"
-            style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
-          />
-        </div>
-      )}
-      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+    <div className="bg-card p-5">
+      <p className="text-xs text-muted-foreground">{label}</p>
+      <p className="mt-1 text-2xl font-semibold tabular-nums">{value}</p>
+      {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
     </div>
   );
 }
-
-function ScoreBar({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="rounded-lg bg-muted/40 p-3">
-      <div className="flex items-baseline justify-between gap-2">
-        <span className="truncate text-xs text-muted-foreground">{label}</span>
-        <span className="text-lg font-semibold tabular-nums">{value}%</span>
-      </div>
-      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-background">
-        <div
-          className="h-full rounded-full bg-primary"
-          style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
-        />
-      </div>
-    </div>
-  );
-}
-
