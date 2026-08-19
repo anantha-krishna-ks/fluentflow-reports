@@ -440,7 +440,7 @@ function SortBtn({
 
 function FactCell({ label, value, hint }: { label: string; value: React.ReactNode; hint?: string }) {
   return (
-    <div className="bg-card p-5">
+    <div className="flex flex-col justify-center bg-card p-5">
       <p className="text-xs text-muted-foreground">{label}</p>
       <p className="mt-1 text-2xl font-semibold tabular-nums">{value}</p>
       {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
