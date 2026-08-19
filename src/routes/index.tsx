@@ -77,6 +77,8 @@ function ClassReport() {
   const search = Route.useSearch();
   const navigate = useNavigate({ from: "/" });
   const [sort, setSort] = useState<"overall" | "fluency" | "pronunciation" | "name">("overall");
+  const [selectedWord, setSelectedWord] = useState<string | null>(null);
+
 
   const { section, from, to, band, q } = search;
 
