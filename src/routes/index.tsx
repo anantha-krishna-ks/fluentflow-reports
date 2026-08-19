@@ -368,7 +368,7 @@ function ClassReport() {
               <Table className="table-fixed">
                 <TableHeader className="bg-secondary/80">
                   <TableRow className="hover:bg-transparent">
-                    <TableHead className="w-[20%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[20%] py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "name"}
                         dir={sort.dir}
@@ -377,7 +377,7 @@ function ClassReport() {
                         Student
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[8%] py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[10%] py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "attempts"}
                         dir={sort.dir}
@@ -386,7 +386,7 @@ function ClassReport() {
                         Attempts
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "fluency"}
                         dir={sort.dir}
@@ -395,16 +395,16 @@ function ClassReport() {
                         Fluency
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "pronunciation"}
                         dir={sort.dir}
                         onClick={() => handleSort("pronunciation")}
                       >
-                        Pronunciation
+                        Pronun.
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[9%] py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[9%] py-3 text-center [&_button]:justify-center text-xs font-semibold tracking-wide text-foreground uppercase">
                       <SortBtn
                         active={sort.key === "overall"}
                         dir={sort.dir}
@@ -413,13 +413,13 @@ function ClassReport() {
                         Overall
                       </SortBtn>
                     </TableHead>
-                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[13%] py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       Band
                     </TableHead>
-                    <TableHead className="w-[6%] text-center py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[6%] text-center py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       Words
                     </TableHead>
-                    <TableHead className="w-[12%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
+                    <TableHead className="w-[10%] py-3 text-xs font-semibold tracking-wide text-foreground uppercase">
                       Last submission
                     </TableHead>
                     <TableHead className="w-[6%] py-3" />
