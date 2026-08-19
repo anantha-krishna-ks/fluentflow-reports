@@ -213,14 +213,15 @@ export function studentsForWord(
   word: string,
 ): WordStudent[] {
   const scoped = filterAttempts(section, from, to);
-  const map = new Map<string, { count: number; acc: number[]; sentence: string }>();
+  const map = new Map<string, { count: number; acc: number[]; sentence: string; date: string }>();
   for (const a of scoped) {
     for (const w of a.words) {
       if (w.word !== word) continue;
-      const entry = map.get(a.studentId) ?? { count: 0, acc: [], sentence: a.sentence };
+      const entry = map.get(a.studentId) ?? { count: 0, acc: [], sentence: a.sentence, date: "" };
       entry.count++;
       entry.acc.push(w.accuracy);
-      if (a.sentence && entry.sentence.length < a.sentence.length) {
+      if (a.date >= entry.date) {
+        entry.date = a.date;
         entry.sentence = a.sentence;
       }
       map.set(a.studentId, entry);
