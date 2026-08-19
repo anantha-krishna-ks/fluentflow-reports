@@ -368,14 +368,14 @@ function ClassReport() {
               <Table className="table-fixed">
                 <colgroup>
                   <col style={{ width: "20%" }} />
+                  <col style={{ width: "11%" }} />
+                  <col style={{ width: "12%" }} />
+                  <col style={{ width: "12%" }} />
                   <col style={{ width: "10%" }} />
-                  <col style={{ width: "13%" }} />
-                  <col style={{ width: "13%" }} />
-                  <col style={{ width: "9%" }} />
-                  <col style={{ width: "13%" }} />
+                  <col style={{ width: "12%" }} />
                   <col style={{ width: "6%" }} />
-                  <col style={{ width: "10%" }} />
-                  <col style={{ width: "6%" }} />
+                  <col style={{ width: "12%" }} />
+                  <col style={{ width: "5%" }} />
                 </colgroup>
                 <TableHeader className="bg-secondary/80">
                   <TableRow className="hover:bg-transparent">
@@ -487,7 +487,7 @@ function ClassReport() {
                       <TableCell className="py-3 text-center tabular-nums">
                         {r.wordsToImprove}
                       </TableCell>
-                      <TableCell className="py-3 text-sm text-muted-foreground">
+                      <TableCell className="py-3 text-sm whitespace-nowrap text-muted-foreground">
                         {formatDate(r.lastSubmission)}
                       </TableCell>
                       <TableCell className="py-3 pr-3 text-right">
@@ -712,7 +712,7 @@ function SortBtn({
       onClick={onClick}
       className={`flex w-full items-center gap-1 leading-tight break-words hover:text-foreground ${active ? "text-foreground font-semibold" : "text-muted-foreground"}`}
     >
-      <span className="min-w-0 break-words">{children}</span>
+      <span className="min-w-0 whitespace-nowrap">{children}</span>
       {active ? (
         dir === "asc" ? (
           <ArrowUp className="size-3.5 shrink-0" />
