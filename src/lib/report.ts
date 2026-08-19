@@ -195,8 +195,49 @@ export function studentDetail(studentId: string, from: string, to: string) {
         avgAccuracy: avg(e.acc),
         sentence: e.sentence,
       }))
-      .sort((a, b) => b.count - a.count),
+    .sort((a, b) => b.count - a.count),
   };
+}
+
+export interface WordStudent {
+  student: Student;
+  instances: number;
+  avgAccuracy: number;
+  latestSentence: string;
+}
+
+export function studentsForWord(
+  section: string,
+  from: string,
+  to: string,
+  word: string,
+): WordStudent[] {
+  const scoped = filterAttempts(section, from, to);
+  const map = new Map<string, { count: number; acc: number[]; sentence: string }>();
+  for (const a of scoped) {
+    for (const w of a.words) {
+      if (w.word !== word) continue;
+      const entry = map.get(a.studentId) ?? { count: 0, acc: [], sentence: a.sentence };
+      entry.count++;
+      entry.acc.push(w.accuracy);
+      if (a.sentence && entry.sentence.length < a.sentence.length) {
+        entry.sentence = a.sentence;
+      }
+      map.set(a.studentId, entry);
+    }
+  }
+  return allStudents
+    .filter((s) => s.section === section && map.has(s.id))
+    .map((student) => {
+      const e = map.get(student.id)!;
+      return {
+        student,
+        instances: e.count,
+        avgAccuracy: avg(e.acc),
+        latestSentence: e.sentence,
+      };
+    })
+    .sort((a, b) => b.instances - a.instances);
 }
 
 export function formatDate(iso: string) {
