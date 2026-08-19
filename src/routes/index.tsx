@@ -188,13 +188,12 @@ function ClassReport() {
           </p>
         </div>
         <Button
-          variant="outline"
           size="sm"
-          className="self-start sm:self-auto print:hidden"
+          className="self-start sm:self-auto gap-1.5 rounded-full bg-primary pl-3.5 pr-4 text-primary-foreground shadow-sm transition-all hover:shadow-md hover:brightness-105 active:scale-[0.98] print:hidden"
           onClick={() => window.print()}
         >
-          <Download className="mr-1.5 size-4" />
-          Export PDF
+          <Download className="size-4" />
+          <span className="text-sm font-medium">Export PDF</span>
         </Button>
       </header>
 
