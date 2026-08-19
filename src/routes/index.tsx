@@ -439,70 +439,59 @@ function SortBtn({
   );
 }
 
-function StatTile({
+function MetricCell({
   label,
   value,
   hint,
   accent,
   icon,
+  progress,
 }: {
   label: string;
-  value: string | number;
+  value: React.ReactNode;
   hint?: string;
   accent?: boolean;
   icon?: React.ReactNode;
+  progress?: number;
 }) {
   return (
-    <div
-      className={`flex h-full flex-col gap-2 rounded-xl border p-4 sm:p-5 ${accent ? "bg-primary/5 border-primary/20" : "bg-card"}`}
-    >
+    <div className="flex flex-col gap-1 p-4 sm:p-5">
       <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-        {icon ?? <GraduationCap className="size-4 shrink-0" />}
+        {icon ?? <GraduationCap className="size-3.5 shrink-0" />}
         <span className="truncate">{label}</span>
       </div>
-      <div>
-        <p className="text-2xl font-semibold tabular-nums sm:text-3xl">{value}</p>
-        {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+      <p
+        className={`text-2xl font-semibold tabular-nums sm:text-3xl ${accent ? "text-primary" : ""}`}
+      >
+        {value}
+      </p>
+      {typeof progress === "number" && (
+        <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-muted">
+          <div
+            className="h-full rounded-full bg-primary"
+            style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
+          />
+        </div>
+      )}
+      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+    </div>
+  );
+}
+
+function ScoreBar({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="rounded-lg bg-muted/40 p-3">
+      <div className="flex items-baseline justify-between gap-2">
+        <span className="truncate text-xs text-muted-foreground">{label}</span>
+        <span className="text-lg font-semibold tabular-nums">{value}%</span>
+      </div>
+      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-background">
+        <div
+          className="h-full rounded-full bg-primary"
+          style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
+        />
       </div>
     </div>
   );
 }
 
-function AttendanceWidget({
-  submitted,
-  total,
-  totalChapters,
-  totalExercises,
-  submissionRate,
-}: {
-  submitted: number;
-  total: number;
-  totalChapters: number;
-  totalExercises: number;
-  submissionRate: number;
-}) {
-  return (
-    <div className="grid h-full grid-cols-2 gap-3 rounded-xl border bg-card p-4 sm:p-5">
-      <div>
-        <p className="text-xs text-muted-foreground">Submitted attendance</p>
-        <p className="mt-0.5 text-2xl font-semibold tabular-nums sm:text-3xl">
-          {submitted} <span className="text-lg text-muted-foreground">/ {total}</span>
-        </p>
-      </div>
-      <div>
-        <p className="text-xs text-muted-foreground">Submission rate</p>
-        <p className="mt-0.5 text-2xl font-semibold text-primary tabular-nums sm:text-3xl">
-          {submissionRate}%
-        </p>
-      </div>
-      <div className="rounded-lg bg-muted/50 p-3">
-        <p className="text-[11px] text-muted-foreground">Total chapters</p>
-        <p className="mt-0.5 text-lg font-semibold tabular-nums">{totalChapters}</p>
-      </div>
-      <div className="rounded-lg bg-muted/50 p-3">
-        <p className="text-[11px] text-muted-foreground">Total exercises</p>
-        <p className="mt-0.5 text-lg font-semibold tabular-nums">{totalExercises}</p>
-      </div>
-    </div>
-  );
-}
