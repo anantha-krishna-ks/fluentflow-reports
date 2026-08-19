@@ -136,13 +136,20 @@ function ClassReport() {
         onChange={(next) => update(next)}
       />
 
-      <section className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5">
-        <StatTile label="Students in section" value={summary.total} icon={<Users className="size-4" />} />
-        <StatTile label="Total chapters" value={summary.totalChapters} />
-        <StatTile label="Total exercises" value={summary.totalExercises} />
+      <section className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-5">
+        <div className="sm:col-span-2 lg:col-span-2">
+          <AttendanceWidget
+            submitted={summary.submitted}
+            total={summary.total}
+            totalChapters={summary.totalChapters}
+            totalExercises={summary.totalExercises}
+            submissionRate={summary.submissionRate}
+          />
+        </div>
         <StatTile label="Avg fluency" value={`${summary.avgFluency}%`} accent />
         <StatTile label="Avg pronunciation" value={`${summary.avgPronunciation}%`} accent />
       </section>
+
 
       <section className="mt-4 grid gap-4 lg:grid-cols-2">
         <BandBreakdown title="Fluency" average={summary.avgFluency} counts={fluencyCounts} />
@@ -433,6 +440,47 @@ function StatTile({
       </div>
       <p className="mt-2 text-2xl font-semibold tabular-nums sm:text-3xl">{value}</p>
       {hint && <p className="mt-0.5 text-xs text-muted-foreground">{hint}</p>}
+    </div>
+  );
+}
+
+function AttendanceWidget({
+  submitted,
+  total,
+  totalChapters,
+  totalExercises,
+  submissionRate,
+}: {
+  submitted: number;
+  total: number;
+  totalChapters: number;
+  totalExercises: number;
+  submissionRate: number;
+}) {
+  return (
+    <div className="h-full rounded-xl border bg-card p-4 sm:p-5">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <p className="text-xs font-medium text-muted-foreground">Submitted attendance</p>
+          <p className="mt-1 text-2xl font-semibold sm:text-3xl tabular-nums">
+            {submitted} <span className="text-lg text-muted-foreground">/ {total}</span>
+          </p>
+        </div>
+        <div className="text-right">
+          <p className="text-xs font-medium text-muted-foreground">Submission rate</p>
+          <p className="mt-1 text-2xl font-semibold text-primary tabular-nums">{submissionRate}%</p>
+        </div>
+      </div>
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        <div className="rounded-lg bg-muted/50 p-3">
+          <p className="text-[11px] text-muted-foreground">Total chapters</p>
+          <p className="mt-0.5 text-lg font-semibold tabular-nums">{totalChapters}</p>
+        </div>
+        <div className="rounded-lg bg-muted/50 p-3">
+          <p className="text-[11px] text-muted-foreground">Total exercises</p>
+          <p className="mt-0.5 text-lg font-semibold tabular-nums">{totalExercises}</p>
+        </div>
+      </div>
     </div>
   );
 }
