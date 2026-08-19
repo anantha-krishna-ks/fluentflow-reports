@@ -136,8 +136,8 @@ function ClassReport() {
         onChange={(next) => update(next)}
       />
 
-      <section className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-5">
-        <div className="sm:col-span-2 lg:col-span-2">
+      <section className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-6">
+        <div className="sm:col-span-2">
           <AttendanceWidget
             submitted={summary.submitted}
             total={summary.total}
@@ -146,6 +146,18 @@ function ClassReport() {
             submissionRate={summary.submissionRate}
           />
         </div>
+        <StatTile
+          label="Students in section"
+          value={summary.total}
+          hint={`${summary.submitted} of ${summary.total} submitted`}
+          icon={<Users className="size-4" />}
+        />
+        <StatTile
+          label="Total attempts"
+          value={summary.attempts}
+          hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} per student`}
+          accent
+        />
         <StatTile label="Avg fluency" value={`${summary.avgFluency}%`} accent />
         <StatTile label="Avg pronunciation" value={`${summary.avgPronunciation}%`} accent />
       </section>
@@ -432,7 +444,7 @@ function StatTile({
 }) {
   return (
     <div
-      className={`rounded-xl border p-4 ${accent ? "bg-primary/5 border-primary/20" : "bg-card"}`}
+      className={`flex h-full flex-col justify-between rounded-xl border p-4 sm:p-5 ${accent ? "bg-primary/5 border-primary/20" : "bg-card"}`}
     >
       <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
         {icon ?? <GraduationCap className="size-4" />}
@@ -458,11 +470,11 @@ function AttendanceWidget({
   submissionRate: number;
 }) {
   return (
-    <div className="h-full rounded-xl border bg-card p-4 sm:p-5">
+    <div className="flex h-full flex-col justify-between rounded-xl border bg-card p-4 sm:p-5">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-xs font-medium text-muted-foreground">Submitted attendance</p>
-          <p className="mt-1 text-2xl font-semibold sm:text-3xl tabular-nums">
+          <p className="mt-1 text-2xl font-semibold tabular-nums sm:text-3xl">
             {submitted} <span className="text-lg text-muted-foreground">/ {total}</span>
           </p>
         </div>
