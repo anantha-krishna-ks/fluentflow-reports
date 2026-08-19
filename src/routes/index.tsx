@@ -460,11 +460,11 @@ function AttendanceWidget({
   submissionRate: number;
 }) {
   return (
-    <div className="h-full rounded-xl border bg-card p-4 sm:p-5">
+    <div className="flex h-full flex-col justify-between rounded-xl border bg-card p-4 sm:p-5">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-xs font-medium text-muted-foreground">Submitted attendance</p>
-          <p className="mt-1 text-2xl font-semibold sm:text-3xl tabular-nums">
+          <p className="mt-1 text-2xl font-semibold tabular-nums sm:text-3xl">
             {submitted} <span className="text-lg text-muted-foreground">/ {total}</span>
           </p>
         </div>
