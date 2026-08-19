@@ -16,6 +16,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -81,6 +88,8 @@ function ClassReport() {
     dir: "asc" | "desc";
   }>({ key: "overall", dir: "desc" });
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
+  const [pageSize, setPageSize] = useState(10);
+  const [page, setPage] = useState(1);
 
   function handleSort(key: typeof sort.key) {
     setSort((prev) => ({
@@ -132,6 +141,17 @@ function ClassReport() {
       return dir * (a[sort.key] - b[sort.key]);
     });
   }, [summary.rows, band, q, sort.key, sort.dir]);
+
+  const totalPages = Math.max(1, Math.ceil(rows.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const pageRows = useMemo(
+    () => rows.slice((currentPage - 1) * pageSize, currentPage * pageSize),
+    [rows, currentPage, pageSize],
+  );
+
+  useEffect(() => {
+    setPage(1);
+  }, [band, q, sort.key, sort.dir, section, from, to, pageSize]);
 
   const update = (next: Partial<ReportSearch>) =>
     navigate({
@@ -335,9 +355,9 @@ function ClassReport() {
         {/* Desktop table */}
         <div className="hidden px-4 pb-5 sm:px-5 md:block">
           <div className="overflow-hidden rounded-xl border">
-            <div className="max-h-[36rem] overflow-auto">
+            <div>
               <Table>
-                <TableHeader className="sticky top-0 z-10 bg-secondary/80 backdrop-blur">
+                <TableHeader className="bg-secondary/80">
                   <TableRow className="hover:bg-transparent">
                     <TableHead className="w-[26%] py-3 text-xs font-semibold tracking-wider text-foreground uppercase">
                       <SortBtn
@@ -397,7 +417,7 @@ function ClassReport() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {rows.map((r) => (
+                  {pageRows.map((r) => (
                     <TableRow
                       key={r.student.id}
                       className="border-border/70 transition-colors hover:bg-accent/40"
@@ -474,12 +494,20 @@ function ClassReport() {
               </Table>
             </div>
           </div>
+          <TablePager
+            page={currentPage}
+            totalPages={totalPages}
+            pageSize={pageSize}
+            total={rows.length}
+            onPageChange={setPage}
+            onPageSizeChange={setPageSize}
+          />
         </div>
 
 
         {/* Mobile cards */}
         <div className="space-y-3 p-4 md:hidden">
-          {rows.map((r) => (
+          {pageRows.map((r) => (
             <Link
               key={r.student.id}
               to="/students/$studentId"
@@ -510,9 +538,82 @@ function ClassReport() {
           {rows.length === 0 && (
             <p className="py-6 text-center text-sm text-muted-foreground">No students match.</p>
           )}
+          {rows.length > 0 && (
+            <TablePager
+              page={currentPage}
+              totalPages={totalPages}
+              pageSize={pageSize}
+              total={rows.length}
+              onPageChange={setPage}
+              onPageSizeChange={setPageSize}
+            />
+          )}
         </div>
       </section>
     </main>
+  );
+}
+
+function TablePager({
+  page,
+  totalPages,
+  pageSize,
+  total,
+  onPageChange,
+  onPageSizeChange,
+}: {
+  page: number;
+  totalPages: number;
+  pageSize: number;
+  total: number;
+  onPageChange: (p: number) => void;
+  onPageSizeChange: (n: number) => void;
+}) {
+  const start = total === 0 ? 0 : (page - 1) * pageSize + 1;
+  const end = Math.min(page * pageSize, total);
+
+  return (
+    <div className="mt-4 flex flex-col items-center gap-3 border-t pt-4 sm:flex-row sm:justify-between">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <span>Rows per page</span>
+        <Select value={String(pageSize)} onValueChange={(v) => onPageSizeChange(Number(v))}>
+          <SelectTrigger className="h-9 w-[4.5rem]">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {[10, 25, 50, 100].map((n) => (
+              <SelectItem key={n} value={String(n)}>
+                {n}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <p className="text-sm text-muted-foreground tabular-nums">
+        {start}–{end} of {total}
+      </p>
+      <div className="flex items-center gap-1">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => onPageChange(page - 1)}
+          disabled={page <= 1}
+        >
+          <ChevronLeft className="size-4" /> Prev
+        </Button>
+        <span className="px-2 text-sm font-medium tabular-nums">
+          {page} / {totalPages}
+        </span>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => onPageChange(page + 1)}
+          disabled={page >= totalPages}
+        >
+          Next <ChevronRight className="size-4" />
+        </Button>
+      </div>
+    </div>
   );
 }
 
