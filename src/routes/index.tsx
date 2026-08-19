@@ -434,7 +434,7 @@ function StatTile({
 }) {
   return (
     <div
-      className={`rounded-xl border p-4 ${accent ? "bg-primary/5 border-primary/20" : "bg-card"}`}
+      className={`flex h-full flex-col justify-between rounded-xl border p-4 sm:p-5 ${accent ? "bg-primary/5 border-primary/20" : "bg-card"}`}
     >
       <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
         {icon ?? <GraduationCap className="size-4" />}
