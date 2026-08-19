@@ -19,6 +19,8 @@ import {
   ArrowUpDown,
   ChevronLeft,
   ChevronRight,
+  Download,
+
 } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
@@ -173,17 +175,29 @@ function ClassReport() {
 
   return (
     <main className="w-full px-4 py-6 sm:px-6 lg:px-8 lg:py-10 xl:px-12">
-      <header className="mb-6">
-        <p className="text-xs font-semibold tracking-widest text-primary uppercase">
-          Language training · Reading assessment
-        </p>
-        <h1 className="mt-1 text-xl font-medium tracking-tight sm:text-2xl">
-          Class performance report
-        </h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {sectionLabel} · {formatDate(from)} – {formatDate(to)}
-        </p>
+      <header className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase">
+            Language training · Reading assessment
+          </p>
+          <h1 className="mt-1 text-xl font-medium tracking-tight sm:text-2xl">
+            Class performance report
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {sectionLabel} · {formatDate(from)} – {formatDate(to)}
+          </p>
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          className="self-start sm:self-auto print:hidden"
+          onClick={() => window.print()}
+        >
+          <Download className="mr-1.5 size-4" />
+          Export PDF
+        </Button>
       </header>
+
 
       <ReportFilters
         section={section}
