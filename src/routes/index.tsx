@@ -146,8 +146,18 @@ function ClassReport() {
             submissionRate={summary.submissionRate}
           />
         </div>
-        <StatTile label="Students in section" value={summary.total} icon={<Users className="size-4" />} />
-        <StatTile label="Total attempts" value={summary.attempts} accent />
+        <StatTile
+          label="Students in section"
+          value={summary.total}
+          hint={`${summary.submitted} of ${summary.total} submitted`}
+          icon={<Users className="size-4" />}
+        />
+        <StatTile
+          label="Total attempts"
+          value={summary.attempts}
+          hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} per student`}
+          accent
+        />
         <StatTile label="Avg fluency" value={`${summary.avgFluency}%`} accent />
         <StatTile label="Avg pronunciation" value={`${summary.avgPronunciation}%`} accent />
       </section>
