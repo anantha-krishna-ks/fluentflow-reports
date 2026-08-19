@@ -45,7 +45,7 @@ function StudentReport() {
   const sectionLabel = sections.find((s) => s.id === detail.student.section)?.label ?? "";
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+    <main className="w-full px-4 py-6 sm:px-6 lg:px-8 lg:py-10 xl:px-12">
       <Link
         to="/"
         search={{ section, from, to, band: "all", q: "" }}
