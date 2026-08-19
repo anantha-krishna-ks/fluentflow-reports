@@ -136,31 +136,41 @@ function ClassReport() {
         onChange={(next) => update(next)}
       />
 
-      <section className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-6">
-        <div className="sm:col-span-2">
-          <AttendanceWidget
-            submitted={summary.submitted}
-            total={summary.total}
-            totalChapters={summary.totalChapters}
-            totalExercises={summary.totalExercises}
-            submissionRate={summary.submissionRate}
-          />
+      <section className="mt-6">
+        <div className="rounded-xl border bg-card">
+          <div className="grid grid-cols-2 divide-y divide-border sm:grid-cols-3 sm:divide-y-0 lg:grid-cols-6 lg:divide-x">
+            <MetricCell
+              label="Submitted attendance"
+              value={
+                <>
+                  {summary.submitted}
+                  <span className="text-lg text-muted-foreground"> / {summary.total}</span>
+                </>
+              }
+              icon={<Users className="size-3.5 shrink-0" />}
+            />
+            <MetricCell
+              label="Submission rate"
+              value={`${summary.submissionRate}%`}
+              accent
+              progress={summary.submissionRate}
+            />
+            <MetricCell label="Students in section" value={summary.total} />
+            <MetricCell label="Total chapters" value={summary.totalChapters} />
+            <MetricCell label="Total exercises" value={summary.totalExercises} />
+            <MetricCell
+              label="Total attempts"
+              value={summary.attempts}
+              hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} per student`}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-3 border-t border-border p-4 sm:grid-cols-2 sm:p-5">
+            <ScoreBar label="Avg fluency" value={summary.avgFluency} />
+            <ScoreBar label="Avg pronunciation" value={summary.avgPronunciation} />
+          </div>
         </div>
-        <StatTile
-          label="Students in section"
-          value={summary.total}
-          hint={`${summary.submitted} of ${summary.total} submitted`}
-          icon={<Users className="size-4" />}
-        />
-        <StatTile
-          label="Total attempts"
-          value={summary.attempts}
-          hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} per student`}
-          accent
-        />
-        <StatTile label="Avg fluency" value={`${summary.avgFluency}%`} accent />
-        <StatTile label="Avg pronunciation" value={`${summary.avgPronunciation}%`} accent />
       </section>
+
 
 
       <section className="mt-4 grid gap-4 lg:grid-cols-2">
