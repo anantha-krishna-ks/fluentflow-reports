@@ -136,13 +136,20 @@ function ClassReport() {
         onChange={(next) => update(next)}
       />
 
-      <section className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5">
-        <StatTile label="Students in section" value={summary.total} icon={<Users className="size-4" />} />
-        <StatTile label="Total chapters" value={summary.totalChapters} />
-        <StatTile label="Total exercises" value={summary.totalExercises} />
+      <section className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-5">
+        <div className="sm:col-span-2 lg:col-span-2">
+          <AttendanceWidget
+            submitted={summary.submitted}
+            total={summary.total}
+            totalChapters={summary.totalChapters}
+            totalExercises={summary.totalExercises}
+            submissionRate={summary.submissionRate}
+          />
+        </div>
         <StatTile label="Avg fluency" value={`${summary.avgFluency}%`} accent />
         <StatTile label="Avg pronunciation" value={`${summary.avgPronunciation}%`} accent />
       </section>
+
 
       <section className="mt-4 grid gap-4 lg:grid-cols-2">
         <BandBreakdown title="Fluency" average={summary.avgFluency} counts={fluencyCounts} />
