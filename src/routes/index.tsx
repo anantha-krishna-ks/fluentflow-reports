@@ -655,15 +655,17 @@ function TablePager({
 function WordStudentsSheet({
   word,
   section,
+  chapter,
   from,
   to,
 }: {
   word: string;
   section: string;
+  chapter: string;
   from: string;
   to: string;
 }) {
-  const students = useMemo(() => studentsForWord(section, from, to, word), [section, from, to, word]);
+  const students = useMemo(() => studentsForWord(section, from, to, chapter, word), [section, from, to, chapter, word]);
 
   return (
     <SheetContent className="w-full sm:max-w-md">
