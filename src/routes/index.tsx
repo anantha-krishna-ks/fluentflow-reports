@@ -331,7 +331,7 @@ function ClassReport() {
                       </div>
                     </button>
                   </SheetTrigger>
-                  <WordStudentsSheet word={w.word} section={section} from={from} to={to} />
+                  <WordStudentsSheet word={w.word} section={section} chapter={chapter} from={from} to={to} />
                 </Sheet>
               </li>
             ))}
