@@ -547,7 +547,7 @@ function ClassReport() {
               key={r.student.id}
               to="/students/$studentId"
               params={{ studentId: r.student.id }}
-              search={{ section, from, to }}
+              search={{ section, chapter, from, to }}
               className="block rounded-lg border p-3 transition-colors hover:bg-accent"
             >
               <div className="flex items-start justify-between gap-2">
