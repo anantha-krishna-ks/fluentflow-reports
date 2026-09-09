@@ -10,6 +10,7 @@ import { bandOf, formatDate, studentDetail } from "@/lib/report";
 
 const searchSchema = z.object({
   section: fallback(z.string(), "grade-6-a").default("grade-6-a"),
+  chapter: fallback(z.string(), "all").default("all"),
   from: fallback(z.string(), TERM_START).default(TERM_START),
   to: fallback(z.string(), TERM_END).default(TERM_END),
 });
