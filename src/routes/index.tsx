@@ -109,11 +109,11 @@ function ClassReport() {
     }));
   }
 
-  const { section, from, to, band, q } = search;
+  const { section, chapter, from, to, band, q } = search;
 
-  const summary = useMemo(() => classSummary(section, from, to), [section, from, to]);
-  const words = useMemo(() => mispronouncedWords(section, from, to), [section, from, to]);
-  const trend = useMemo(() => buildTrend(section, from, to), [section, from, to]);
+  const summary = useMemo(() => classSummary(section, from, to, chapter), [section, from, to, chapter]);
+  const words = useMemo(() => mispronouncedWords(section, from, to, chapter), [section, from, to, chapter]);
+  const trend = useMemo(() => buildTrend(section, from, to, chapter), [section, from, to, chapter]);
   const fluencyCounts = useMemo(() => countBands(summary.rows, "fluency"), [summary.rows]);
   const pronCounts = useMemo(() => countBands(summary.rows, "pronunciation"), [summary.rows]);
 
