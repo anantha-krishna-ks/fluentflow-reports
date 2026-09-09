@@ -38,8 +38,8 @@ export const Route = createFileRoute("/students/$studentId")({
 
 function StudentReport() {
   const { studentId } = Route.useParams();
-  const { section, from, to } = Route.useSearch();
-  const detail = studentDetail(studentId, from, to);
+  const { section, chapter, from, to } = Route.useSearch();
+  const detail = studentDetail(studentId, from, to, chapter);
 
   if (!detail) throw notFound();
 
