@@ -510,7 +510,7 @@ function ClassReport() {
                           <Link
                             to="/students/$studentId"
                             params={{ studentId: r.student.id }}
-                            search={{ section, from, to }}
+                            search={{ section, chapter, from, to }}
                           >
                             View <ArrowUpRight className="size-3.5 shrink-0" />
                           </Link>
