@@ -162,7 +162,7 @@ function ClassReport() {
 
   useEffect(() => {
     setPage(1);
-  }, [band, q, sort.key, sort.dir, section, from, to, pageSize]);
+  }, [band, q, sort.key, sort.dir, section, chapter, from, to, pageSize]);
 
   const update = (next: Partial<ReportSearch>) =>
     navigate({
@@ -171,6 +171,7 @@ function ClassReport() {
     });
 
   const sectionLabel = sections.find((s) => s.id === section)?.label ?? section;
+  const chapterLabel = chapter === "all" ? "All chapters" : chapter;
   const maxWord = words[0]?.instances ?? 1;
 
   return (
