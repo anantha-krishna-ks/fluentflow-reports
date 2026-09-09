@@ -1,5 +1,6 @@
 import {
   attempts as allAttempts,
+  chapterOptions,
   sections,
   students as allStudents,
   type Attempt,
