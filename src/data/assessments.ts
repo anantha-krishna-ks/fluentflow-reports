@@ -125,6 +125,7 @@ function buildData() {
         );
 
         const sentence = sentences[Math.floor(rand() * sentences.length)]!;
+        const chapter = chapterOptions[Math.floor(rand() * chapterOptions.length)]!;
         const issueCount = pronunciation > 80 ? Math.floor(rand() * 2) : 1 + Math.floor(rand() * 3);
         const words: WordIssue[] = [];
         for (let w = 0; w < issueCount; w++) {
@@ -138,6 +139,7 @@ function buildData() {
           studentId: id,
           date: iso(d),
           sentence,
+          chapter,
           fluency,
           pronunciation,
           words,
