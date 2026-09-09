@@ -148,8 +148,13 @@ export interface TrendPoint {
   pronunciation: number;
 }
 
-export function buildTrend(section: string, from: string, to: string): TrendPoint[] {
-  const scoped = filterAttempts(section, from, to);
+export function buildTrend(
+  section: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+): TrendPoint[] {
+  const scoped = filterAttempts(section, from, to, chapter);
   const buckets = new Map<string, { f: number[]; p: number[] }>();
   for (const a of scoped) {
     const key = a.date.slice(0, 7);
