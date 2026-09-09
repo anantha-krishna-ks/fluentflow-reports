@@ -30,16 +30,14 @@ export interface ClassSection {
   chapters: string[];
 }
 
-export const chapters = [
-  "Chapter 1: The Thunderstorm",
-  "Chapter 2: A Warm Meal",
-  "Chapter 3: A Long Journey",
-  "Chapter 4: Evening Light",
-  "Chapter 5: The Library",
-  "Chapter 6: A Funny Mistake",
-  "Chapter 7: Mountain Weather",
-  "Chapter 8: The Presentation",
+export const chapterOptions = [
+  "Tiny Lily",
+  "Beautiful Garden",
+  "Early Sunrise",
+  "My Friends",
 ];
+
+export const chapters = chapterOptions;
 
 export const sections: ClassSection[] = [
   { id: "grade-6-a", label: "Grade 6 - Section A", chapters },
