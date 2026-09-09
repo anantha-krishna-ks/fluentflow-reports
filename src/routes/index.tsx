@@ -185,7 +185,7 @@ function ClassReport() {
             Class performance report
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            {sectionLabel} · {formatDate(from)} – {formatDate(to)}
+            {sectionLabel} · {chapterLabel} · {formatDate(from)} – {formatDate(to)}
           </p>
         </div>
         <Button
