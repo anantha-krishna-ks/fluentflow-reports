@@ -11,6 +11,7 @@ export interface Attempt {
   studentId: string;
   date: string; // ISO yyyy-mm-dd
   sentence: string;
+  chapter: string;
   fluency: number;
   pronunciation: number;
   words: WordIssue[];
