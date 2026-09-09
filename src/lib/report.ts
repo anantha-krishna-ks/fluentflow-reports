@@ -172,10 +172,15 @@ export function buildTrend(
     }));
 }
 
-export function classSummary(section: string, from: string, to: string) {
-  const rows = buildStudentRows(section, from, to);
+export function classSummary(
+  section: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+) {
+  const rows = buildStudentRows(section, from, to, chapter);
   const submitted = rows.filter((r) => r.attempts > 0);
-  const totalChapters = sections.find((s) => s.id === section)?.chapters.length ?? 0;
+  const totalChapters = chapter === "all" ? chapterOptions.length : 1;
   return {
     rows,
     total: rows.length,
@@ -183,9 +188,9 @@ export function classSummary(section: string, from: string, to: string) {
     submissionRate: rows.length ? Math.round((submitted.length / rows.length) * 100) : 0,
     avgFluency: avg(submitted.map((r) => r.fluency)),
     avgPronunciation: avg(submitted.map((r) => r.pronunciation)),
-    attempts: filterAttempts(section, from, to).length,
+    attempts: filterAttempts(section, from, to, chapter).length,
     totalChapters,
-    totalExercises: filterAttempts(section, from, to).length,
+    totalExercises: filterAttempts(section, from, to, chapter).length,
   };
 }
 
