@@ -49,7 +49,7 @@ function StudentReport() {
     <main className="w-full px-4 py-6 sm:px-6 lg:px-8 lg:py-10 xl:px-12">
       <Link
         to="/"
-        search={{ section, from, to, band: "all", q: "" }}
+        search={{ section, chapter, from, to, band: "all", q: "" }}
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="size-4" /> Back to class report
