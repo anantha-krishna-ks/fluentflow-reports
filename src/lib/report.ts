@@ -194,11 +194,22 @@ export function classSummary(
   };
 }
 
-export function studentDetail(studentId: string, from: string, to: string) {
+export function studentDetail(
+  studentId: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+) {
   const student = allStudents.find((s) => s.id === studentId);
   if (!student) return null;
   const list = allAttempts
-    .filter((a) => a.studentId === studentId && a.date >= from && a.date <= to)
+    .filter(
+      (a) =>
+        a.studentId === studentId &&
+        a.date >= from &&
+        a.date <= to &&
+        (chapter === "all" || a.chapter === chapter),
+    )
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 
   const wordMap = new Map<string, { count: number; acc: number[]; sentence: string }>();
