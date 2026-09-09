@@ -200,6 +200,7 @@ function ClassReport() {
 
       <ReportFilters
         section={section}
+        chapter={chapter}
         from={from}
         to={to}
         onChange={(next) => update(next)}
