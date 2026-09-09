@@ -253,9 +253,10 @@ export function studentsForWord(
   section: string,
   from: string,
   to: string,
+  chapter: string,
   word: string,
 ): WordStudent[] {
-  const scoped = filterAttempts(section, from, to);
+  const scoped = filterAttempts(section, from, to, chapter);
   const map = new Map<string, { count: number; acc: number[]; sentence: string; date: string }>();
   for (const a of scoped) {
     for (const w of a.words) {
