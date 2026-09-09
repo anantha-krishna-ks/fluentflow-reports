@@ -38,13 +38,29 @@ function avg(nums: number[]) {
   return Math.round(nums.reduce((a, b) => a + b, 0) / nums.length);
 }
 
-export function filterAttempts(section: string, from: string, to: string): Attempt[] {
+export function filterAttempts(
+  section: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+): Attempt[] {
   const ids = new Set(allStudents.filter((s) => s.section === section).map((s) => s.id));
-  return allAttempts.filter((a) => ids.has(a.studentId) && a.date >= from && a.date <= to);
+  return allAttempts.filter(
+    (a) =>
+      ids.has(a.studentId) &&
+      a.date >= from &&
+      a.date <= to &&
+      (chapter === "all" || a.chapter === chapter),
+  );
 }
 
-export function buildStudentRows(section: string, from: string, to: string): StudentRow[] {
-  const scoped = filterAttempts(section, from, to);
+export function buildStudentRows(
+  section: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+): StudentRow[] {
+  const scoped = filterAttempts(section, from, to, chapter);
   const byStudent = new Map<string, Attempt[]>();
   for (const a of scoped) {
     const list = byStudent.get(a.studentId) ?? [];
