@@ -115,8 +115,13 @@ export interface WordStat {
   avgAccuracy: number;
 }
 
-export function mispronouncedWords(section: string, from: string, to: string): WordStat[] {
-  const scoped = filterAttempts(section, from, to);
+export function mispronouncedWords(
+  section: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+): WordStat[] {
+  const scoped = filterAttempts(section, from, to, chapter);
   const map = new Map<string, { instances: number; students: Set<string>; acc: number[] }>();
   for (const a of scoped) {
     for (const w of a.words) {
