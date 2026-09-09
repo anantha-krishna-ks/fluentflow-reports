@@ -109,11 +109,11 @@ function ClassReport() {
     }));
   }
 
-  const { section, from, to, band, q } = search;
+  const { section, chapter, from, to, band, q } = search;
 
-  const summary = useMemo(() => classSummary(section, from, to), [section, from, to]);
-  const words = useMemo(() => mispronouncedWords(section, from, to), [section, from, to]);
-  const trend = useMemo(() => buildTrend(section, from, to), [section, from, to]);
+  const summary = useMemo(() => classSummary(section, from, to, chapter), [section, from, to, chapter]);
+  const words = useMemo(() => mispronouncedWords(section, from, to, chapter), [section, from, to, chapter]);
+  const trend = useMemo(() => buildTrend(section, from, to, chapter), [section, from, to, chapter]);
   const fluencyCounts = useMemo(() => countBands(summary.rows, "fluency"), [summary.rows]);
   const pronCounts = useMemo(() => countBands(summary.rows, "pronunciation"), [summary.rows]);
 
@@ -162,7 +162,7 @@ function ClassReport() {
 
   useEffect(() => {
     setPage(1);
-  }, [band, q, sort.key, sort.dir, section, from, to, pageSize]);
+  }, [band, q, sort.key, sort.dir, section, chapter, from, to, pageSize]);
 
   const update = (next: Partial<ReportSearch>) =>
     navigate({
@@ -171,6 +171,7 @@ function ClassReport() {
     });
 
   const sectionLabel = sections.find((s) => s.id === section)?.label ?? section;
+  const chapterLabel = chapter === "all" ? "All chapters" : chapter;
   const maxWord = words[0]?.instances ?? 1;
 
   return (
@@ -184,7 +185,7 @@ function ClassReport() {
             Class performance report
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            {sectionLabel} · {formatDate(from)} – {formatDate(to)}
+            {sectionLabel} · {chapterLabel} · {formatDate(from)} – {formatDate(to)}
           </p>
         </div>
         <Button
@@ -200,6 +201,7 @@ function ClassReport() {
 
       <ReportFilters
         section={section}
+        chapter={chapter}
         from={from}
         to={to}
         onChange={(next) => update(next)}
@@ -329,7 +331,7 @@ function ClassReport() {
                       </div>
                     </button>
                   </SheetTrigger>
-                  <WordStudentsSheet word={w.word} section={section} from={from} to={to} />
+                  <WordStudentsSheet word={w.word} section={section} chapter={chapter} from={from} to={to} />
                 </Sheet>
               </li>
             ))}
@@ -508,7 +510,7 @@ function ClassReport() {
                           <Link
                             to="/students/$studentId"
                             params={{ studentId: r.student.id }}
-                            search={{ section, from, to }}
+                            search={{ section, chapter, from, to }}
                           >
                             View <ArrowUpRight className="size-3.5 shrink-0" />
                           </Link>
@@ -545,7 +547,7 @@ function ClassReport() {
               key={r.student.id}
               to="/students/$studentId"
               params={{ studentId: r.student.id }}
-              search={{ section, from, to }}
+              search={{ section, chapter, from, to }}
               className="block rounded-lg border p-3 transition-colors hover:bg-accent"
             >
               <div className="flex items-start justify-between gap-2">
@@ -653,15 +655,17 @@ function TablePager({
 function WordStudentsSheet({
   word,
   section,
+  chapter,
   from,
   to,
 }: {
   word: string;
   section: string;
+  chapter: string;
   from: string;
   to: string;
 }) {
-  const students = useMemo(() => studentsForWord(section, from, to, word), [section, from, to, word]);
+  const students = useMemo(() => studentsForWord(section, from, to, chapter, word), [section, from, to, chapter, word]);
 
   return (
     <SheetContent className="w-full sm:max-w-md">

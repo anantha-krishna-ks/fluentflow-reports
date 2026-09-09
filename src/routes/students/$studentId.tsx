@@ -10,6 +10,7 @@ import { bandOf, formatDate, studentDetail } from "@/lib/report";
 
 const searchSchema = z.object({
   section: fallback(z.string(), "grade-6-a").default("grade-6-a"),
+  chapter: fallback(z.string(), "all").default("all"),
   from: fallback(z.string(), TERM_START).default(TERM_START),
   to: fallback(z.string(), TERM_END).default(TERM_END),
 });
@@ -37,8 +38,8 @@ export const Route = createFileRoute("/students/$studentId")({
 
 function StudentReport() {
   const { studentId } = Route.useParams();
-  const { section, from, to } = Route.useSearch();
-  const detail = studentDetail(studentId, from, to);
+  const { section, chapter, from, to } = Route.useSearch();
+  const detail = studentDetail(studentId, from, to, chapter);
 
   if (!detail) throw notFound();
 
@@ -48,7 +49,7 @@ function StudentReport() {
     <main className="w-full px-4 py-6 sm:px-6 lg:px-8 lg:py-10 xl:px-12">
       <Link
         to="/"
-        search={{ section, from, to, band: "all", q: "" }}
+        search={{ section, chapter, from, to, band: "all", q: "" }}
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="size-4" /> Back to class report

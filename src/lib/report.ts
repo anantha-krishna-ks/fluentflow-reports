@@ -1,5 +1,6 @@
 import {
   attempts as allAttempts,
+  chapterOptions,
   sections,
   students as allStudents,
   type Attempt,
@@ -37,13 +38,29 @@ function avg(nums: number[]) {
   return Math.round(nums.reduce((a, b) => a + b, 0) / nums.length);
 }
 
-export function filterAttempts(section: string, from: string, to: string): Attempt[] {
+export function filterAttempts(
+  section: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+): Attempt[] {
   const ids = new Set(allStudents.filter((s) => s.section === section).map((s) => s.id));
-  return allAttempts.filter((a) => ids.has(a.studentId) && a.date >= from && a.date <= to);
+  return allAttempts.filter(
+    (a) =>
+      ids.has(a.studentId) &&
+      a.date >= from &&
+      a.date <= to &&
+      (chapter === "all" || a.chapter === chapter),
+  );
 }
 
-export function buildStudentRows(section: string, from: string, to: string): StudentRow[] {
-  const scoped = filterAttempts(section, from, to);
+export function buildStudentRows(
+  section: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+): StudentRow[] {
+  const scoped = filterAttempts(section, from, to, chapter);
   const byStudent = new Map<string, Attempt[]>();
   for (const a of scoped) {
     const list = byStudent.get(a.studentId) ?? [];
@@ -98,8 +115,13 @@ export interface WordStat {
   avgAccuracy: number;
 }
 
-export function mispronouncedWords(section: string, from: string, to: string): WordStat[] {
-  const scoped = filterAttempts(section, from, to);
+export function mispronouncedWords(
+  section: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+): WordStat[] {
+  const scoped = filterAttempts(section, from, to, chapter);
   const map = new Map<string, { instances: number; students: Set<string>; acc: number[] }>();
   for (const a of scoped) {
     for (const w of a.words) {
@@ -126,8 +148,13 @@ export interface TrendPoint {
   pronunciation: number;
 }
 
-export function buildTrend(section: string, from: string, to: string): TrendPoint[] {
-  const scoped = filterAttempts(section, from, to);
+export function buildTrend(
+  section: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+): TrendPoint[] {
+  const scoped = filterAttempts(section, from, to, chapter);
   const buckets = new Map<string, { f: number[]; p: number[] }>();
   for (const a of scoped) {
     const key = a.date.slice(0, 7);
@@ -145,10 +172,15 @@ export function buildTrend(section: string, from: string, to: string): TrendPoin
     }));
 }
 
-export function classSummary(section: string, from: string, to: string) {
-  const rows = buildStudentRows(section, from, to);
+export function classSummary(
+  section: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+) {
+  const rows = buildStudentRows(section, from, to, chapter);
   const submitted = rows.filter((r) => r.attempts > 0);
-  const totalChapters = sections.find((s) => s.id === section)?.chapters.length ?? 0;
+  const totalChapters = chapter === "all" ? chapterOptions.length : 1;
   return {
     rows,
     total: rows.length,
@@ -156,17 +188,28 @@ export function classSummary(section: string, from: string, to: string) {
     submissionRate: rows.length ? Math.round((submitted.length / rows.length) * 100) : 0,
     avgFluency: avg(submitted.map((r) => r.fluency)),
     avgPronunciation: avg(submitted.map((r) => r.pronunciation)),
-    attempts: filterAttempts(section, from, to).length,
+    attempts: filterAttempts(section, from, to, chapter).length,
     totalChapters,
-    totalExercises: filterAttempts(section, from, to).length,
+    totalExercises: filterAttempts(section, from, to, chapter).length,
   };
 }
 
-export function studentDetail(studentId: string, from: string, to: string) {
+export function studentDetail(
+  studentId: string,
+  from: string,
+  to: string,
+  chapter: string = "all",
+) {
   const student = allStudents.find((s) => s.id === studentId);
   if (!student) return null;
   const list = allAttempts
-    .filter((a) => a.studentId === studentId && a.date >= from && a.date <= to)
+    .filter(
+      (a) =>
+        a.studentId === studentId &&
+        a.date >= from &&
+        a.date <= to &&
+        (chapter === "all" || a.chapter === chapter),
+    )
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 
   const wordMap = new Map<string, { count: number; acc: number[]; sentence: string }>();
@@ -210,9 +253,10 @@ export function studentsForWord(
   section: string,
   from: string,
   to: string,
+  chapter: string,
   word: string,
 ): WordStudent[] {
-  const scoped = filterAttempts(section, from, to);
+  const scoped = filterAttempts(section, from, to, chapter);
   const map = new Map<string, { count: number; acc: number[]; sentence: string; date: string }>();
   for (const a of scoped) {
     for (const w of a.words) {
