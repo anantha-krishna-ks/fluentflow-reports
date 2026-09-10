@@ -230,7 +230,15 @@ function ClassReport() {
 
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-4 lg:col-span-2">
           <FactCell label="Not Attempted" value={summary.total - summary.submitted} />
-          <FactCell label="Chapters" value={summary.totalChapters} />
+          <FactCell
+            label="Chapters"
+            value={
+              <span className="text-2xl font-semibold tabular-nums">
+                {summary.activeChapters}
+                <span className="text-xl text-muted-foreground"> / {summary.totalChapters}</span>
+              </span>
+            }
+          />
           <FactCell label="Exercises" value={summary.totalExercises} />
           <FactCell
             label="Attempts"
