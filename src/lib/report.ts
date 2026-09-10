@@ -180,7 +180,7 @@ export function classSummary(
 ) {
   const rows = buildStudentRows(section, from, to, chapter);
   const submitted = rows.filter((r) => r.attempts > 0);
-  const totalChapters = chapter === "all" ? chapterOptions.length : 1;
+  const activeChapters = chapter === "all" ? chapterOptions.length : 1;
   return {
     rows,
     total: rows.length,
@@ -189,7 +189,8 @@ export function classSummary(
     avgFluency: avg(submitted.map((r) => r.fluency)),
     avgPronunciation: avg(submitted.map((r) => r.pronunciation)),
     attempts: filterAttempts(section, from, to, chapter).length,
-    totalChapters,
+    activeChapters,
+    totalChapters: chapterOptions.length,
     totalExercises: filterAttempts(section, from, to, chapter).length,
   };
 }
