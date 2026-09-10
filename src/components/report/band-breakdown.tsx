@@ -47,6 +47,7 @@ export function BandBreakdown({
               <span className="truncate">{labels[b]}</span>
             </dt>
             <dd className="mt-0.5 text-xl font-semibold tabular-nums">{counts[b]}</dd>
+            <p className="text-[11px] text-muted-foreground">students</p>
           </div>
         ))}
       </dl>
