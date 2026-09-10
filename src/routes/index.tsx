@@ -229,7 +229,7 @@ function ClassReport() {
         </div>
 
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-4 lg:col-span-2">
-          <FactCell label="Students" value={summary.total} />
+          <FactCell label="Not Attempted" value={summary.total - summary.submitted} />
           <FactCell label="Chapters" value={summary.totalChapters} />
           <FactCell label="Exercises" value={summary.totalExercises} />
           <FactCell
