@@ -260,6 +260,21 @@ function ClassReport() {
         />
       </section>
 
+      <div className="mt-3 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-lg border bg-card px-4 py-2.5 text-xs text-muted-foreground">
+        <span className="flex items-center gap-1.5">
+          <span className="size-2.5 rounded-full bg-success" />
+          Excellent <span className="text-foreground">&gt;75%</span>
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="size-2.5 rounded-full bg-warning" />
+          Above average <span className="text-foreground">50–75%</span>
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="size-2.5 rounded-full bg-danger" />
+          Needs improvement <span className="text-foreground">&lt;50%</span>
+        </span>
+      </div>
+
       <section className="mt-4 grid gap-4 lg:grid-cols-5">
         <div className="rounded-xl border bg-card p-4 sm:p-5 lg:col-span-3">
           <h2 className="font-semibold">Class trend</h2>
