@@ -46,8 +46,10 @@ export function BandBreakdown({
               <span className={`size-2 shrink-0 rounded-full ${bandBarColor[b]}`} />
               <span className="truncate">{labels[b]}</span>
             </dt>
-            <dd className="mt-0.5 text-xl font-semibold tabular-nums">{counts[b]}</dd>
-            <p className="text-[11px] text-muted-foreground">students</p>
+            <dd className="mt-1 flex items-baseline gap-1.5">
+              <span className="text-xl font-semibold tabular-nums">{counts[b]}</span>
+              <span className="text-xs font-medium text-muted-foreground">students</span>
+            </dd>
           </div>
         ))}
       </dl>
