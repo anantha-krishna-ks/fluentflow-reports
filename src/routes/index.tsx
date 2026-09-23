@@ -211,7 +211,7 @@ function ClassReport() {
         <div className="rounded-xl border bg-card p-5 lg:col-span-1">
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Users className="size-3.5 shrink-0" />
-            <span>Submitted attendance</span>
+            <span>Students Submission</span>
           </div>
           <div className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <p className="text-4xl font-semibold tracking-tight tabular-nums">
