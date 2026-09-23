@@ -230,8 +230,7 @@ function ClassReport() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-4 lg:col-span-2">
-          <FactCell label="Not Attempted" value={summary.total - summary.submitted} />
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-3 lg:col-span-2">
           <FactCell
             label="Chapters"
             value={
@@ -241,11 +240,10 @@ function ClassReport() {
               </span>
             }
           />
-          <FactCell label="Exercises" value={summary.totalExercises} />
+          <FactCell label="Exercises / Assessments" value={summary.totalExercises} />
           <FactCell
             label="Attempts"
             value={summary.attempts}
-            hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} / student`}
           />
         </div>
       </section>

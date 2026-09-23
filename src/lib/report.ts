@@ -1,6 +1,7 @@
 import {
   attempts as allAttempts,
   chapterOptions,
+  reportTotals,
   sections,
   students as allStudents,
   type Attempt,
@@ -188,10 +189,10 @@ export function classSummary(
     submissionRate: rows.length ? Math.round((submitted.length / rows.length) * 100) : 0,
     avgFluency: avg(submitted.map((r) => r.fluency)),
     avgPronunciation: avg(submitted.map((r) => r.pronunciation)),
-    attempts: filterAttempts(section, from, to, chapter).length,
+    attempts: reportTotals.attempts,
     activeChapters,
     totalChapters: chapterOptions.length,
-    totalExercises: filterAttempts(section, from, to, chapter).length,
+    totalExercises: reportTotals.exercises,
   };
 }
 
