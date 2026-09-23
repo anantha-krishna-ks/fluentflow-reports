@@ -219,7 +219,7 @@ function ClassReport() {
               <span className="text-xl text-muted-foreground"> / {summary.total}</span>
             </p>
             <span className="text-sm font-medium text-primary">
-              {summary.submissionRate}% submission rate
+              ({summary.submissionRate}% submission rate)
             </span>
           </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
