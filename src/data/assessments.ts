@@ -39,6 +39,11 @@ export const chapterOptions = [
 
 export const chapters = chapterOptions;
 
+export const reportTotals = {
+  exercises: 6,
+  attempts: 350,
+};
+
 export const sections: ClassSection[] = [
   { id: "grade-6-a", label: "Grade 6 - Section A", chapters },
   { id: "grade-6-b", label: "Grade 6 - Section B", chapters },
