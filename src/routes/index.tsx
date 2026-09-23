@@ -213,19 +213,21 @@ function ClassReport() {
             <Users className="size-3.5 shrink-0" />
             <span>Submitted attendance</span>
           </div>
-          <p className="mt-2 text-4xl font-semibold tracking-tight tabular-nums">
-            {summary.submitted}
-            <span className="text-xl text-muted-foreground"> / {summary.total}</span>
-          </p>
+          <div className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <p className="text-4xl font-semibold tracking-tight tabular-nums">
+              {summary.submitted}
+              <span className="text-xl text-muted-foreground"> / {summary.total}</span>
+            </p>
+            <span className="text-sm font-medium text-primary">
+              {summary.submissionRate}% submission rate
+            </span>
+          </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
             <div
               className="h-full rounded-full bg-primary"
               style={{ width: `${summary.submissionRate}%` }}
             />
           </div>
-          <p className="mt-2 text-xs text-muted-foreground">
-            {summary.submissionRate}% submission rate
-          </p>
         </div>
 
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-4 lg:col-span-2">
