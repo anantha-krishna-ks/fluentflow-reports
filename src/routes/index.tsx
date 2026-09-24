@@ -240,7 +240,7 @@ function ClassReport() {
               </span>
             }
           />
-          <FactCell label="Exercises / Assessments" value={summary.totalExercises} />
+          <FactCell label="Assessments" value={summary.totalExercises} />
           <FactCell
             label="Attempts"
             value={summary.attempts}
