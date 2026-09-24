@@ -243,15 +243,8 @@ function ClassReport() {
           <FactCell label="Exercises / Assessments" value={summary.totalExercises} />
           <FactCell
             label="Attempts"
-            value={
-              <span className="text-2xl font-semibold tabular-nums">
-                {summary.attempts}
-                <span className="text-sm font-normal text-muted-foreground">
-                  {" "}
-                  (avg {Math.round(summary.attempts / (summary.total || 1))} / student)
-                </span>
-              </span>
-            }
+            value={summary.attempts}
+            hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} / student`}
           />
         </div>
       </section>
