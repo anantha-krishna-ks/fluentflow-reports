@@ -219,7 +219,7 @@ function ClassReport() {
               <span className="text-xl text-muted-foreground"> / {summary.total}</span>
             </p>
             <span className="text-sm font-medium text-primary">
-              ({summary.submissionRate}% submission rate)
+              ({summary.submissionRate}%)
             </span>
           </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
@@ -243,15 +243,8 @@ function ClassReport() {
           <FactCell label="Exercises / Assessments" value={summary.totalExercises} />
           <FactCell
             label="Attempts"
-            value={
-              <span className="text-2xl font-semibold tabular-nums">
-                {summary.attempts}
-                <span className="text-sm font-normal text-muted-foreground">
-                  {" "}
-                  (avg {Math.round(summary.attempts / (summary.total || 1))} / student)
-                </span>
-              </span>
-            }
+            value={summary.attempts}
+            hint={`avg ${Math.round(summary.attempts / (summary.total || 1))} / student`}
           />
         </div>
       </section>
